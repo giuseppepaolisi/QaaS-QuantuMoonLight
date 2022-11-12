@@ -27,6 +27,7 @@ flask-login==0.5.0
 flask-sqlalchemy==2.5.1
 fonttools==4.28.2
 greenlet==1.1.1
+Cython>=0.29.15
 h5py==3.2.1
 icc_rt==2019.0.0
 idna==3.3
