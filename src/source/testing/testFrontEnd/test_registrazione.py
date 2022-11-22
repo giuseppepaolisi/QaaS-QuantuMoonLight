@@ -19,7 +19,7 @@ class TestRegistrazione():
     self.driver.quit()
   
   def test_tC111(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -32,7 +32,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC112(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -46,7 +46,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC113(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -60,7 +60,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC114(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -75,7 +75,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC115(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -89,7 +89,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC116(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -103,7 +103,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC117(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()
@@ -118,7 +118,7 @@ class TestRegistrazione():
     self.driver.find_element(By.CSS_SELECTOR, ".fourth").click()
   
   def test_tC118(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.CSS_SELECTOR, ".user").click()
     self.driver.find_element(By.LINK_TEXT, "Register Here").click()

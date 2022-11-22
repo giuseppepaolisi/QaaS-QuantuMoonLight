@@ -19,7 +19,7 @@ class TestDataset():
     self.driver.quit()
   
   def test_tC211(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -32,7 +32,7 @@ class TestDataset():
     self.driver.find_element(By.ID, "submitForm").click()
   
   def test_tC212(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -43,7 +43,7 @@ class TestDataset():
     self.driver.find_element(By.CSS_SELECTOR, ".fa-rocket").click()
   
   def test_tC221(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -53,7 +53,7 @@ class TestDataset():
     assert self.driver.switch_to.alert.text == "Training set non inserito e/o non valido"
   
   def test_tC222(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -61,7 +61,7 @@ class TestDataset():
     self.driver.find_element(By.ID, "submitForm").click()
   
   def test_tC311(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -73,7 +73,7 @@ class TestDataset():
     self.driver.find_element(By.ID, "submitForm").click()
   
   def test_tC312(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -85,7 +85,7 @@ class TestDataset():
     self.driver.find_element(By.ID, "submitForm").click()
   
   def test_tC321(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()
@@ -97,7 +97,7 @@ class TestDataset():
     self.driver.find_element(By.ID, "submitForm").click()
   
   def test_tC322(self):
-    self.driver.get("http://127.0.0.1:5000/")
+    self.driver.get("http://0.0.0.0:5000/")
     self.driver.set_window_size(1936, 1048)
     self.driver.find_element(By.LINK_TEXT, "QUANTUM ML").click()
     self.driver.find_element(By.ID, "inputFakeBrowseFileTrain").click()

@@ -628,7 +628,7 @@ class Test_signup(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@127.0.0.1/test_db"
+        ] = "mysql://root@0.0.0.0/test_db"
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
             create_database(app.config["SQLALCHEMY_DATABASE_URI"])
@@ -858,7 +858,7 @@ class Test_Login_Logout(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@127.0.0.1/test_db"
+        ] = "mysql://root@0.0.0.0/test_db"
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
             create_database(app.config["SQLALCHEMY_DATABASE_URI"])
@@ -960,7 +960,7 @@ class TestUser(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@127.0.0.1/test_db"
+        ] = "mysql://root@0.0.0.0/test_db"
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         tester = app.test_client(self)
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
@@ -1038,7 +1038,7 @@ class TestList(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@127.0.0.1/test_db"
+        ] = "mysql://root@0.0.0.0/test_db"
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         tester = app.test_client(self)
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
@@ -1393,7 +1393,7 @@ class TestRoutes(unittest.TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@127.0.0.1/test_db"
+        ] = "mysql://root@0.0.0.0/test_db"
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
             create_database(app.config["SQLALCHEMY_DATABASE_URI"])

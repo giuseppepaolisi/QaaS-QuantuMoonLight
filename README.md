@@ -38,7 +38,7 @@ After verifying that you have these prerequisites you will need to proceed in th
    "conda env create -f environment.yml"
 <li> Set-up the interpreter and the environment on your IDE as a Flask Application</li>
 <li>Run the code</li>
-<li>Click the link (usually) http://127.0.0.1:5000, the home page will be shown on your browser</li>
+<li>Click the link (usually) http://0.0.0.0:5000, the home page will be shown on your browser</li>
 </ol>
    <h4>Else if you want to run on prompt:</h4>
    <ol>
