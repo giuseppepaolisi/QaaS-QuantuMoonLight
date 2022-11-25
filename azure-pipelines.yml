@@ -9,14 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
 
-steps:
-  - task: UsePythonVersion@0 #specifica la versione di python utilizzata. Con strategy vai a definire più versioni di python
-    inputs: # non verse per il deploy
-      versionSpec: '3.9'
 
 jobs:
 - deployment: "Deploy Web App"
   displayName: "My Deploy"
+  continueOnError: true
   pool:
     vImage: ubuntu-latest
   strategy:
