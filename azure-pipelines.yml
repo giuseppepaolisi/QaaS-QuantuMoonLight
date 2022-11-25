@@ -11,11 +11,12 @@ pool:
 
 
 jobs:
-- deployment: "Deploy Web App"
-  displayName: "My Deploy"
+- deployment: "QuantuMoonLight_deploy"
+  displayName: "My_deploy"
   continueOnError: true
   pool:
     vImage: ubuntu-latest
+  environment: qmlDevOps.QuantuMoonLight-VM
   strategy:
     runOnce:
       deploy:
