@@ -21,6 +21,7 @@ jobs:
     runOnce:
       deploy:
         steps:
+          - script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
           - script: sudo kill -9 $(sudo lsof -t -i:5000)
           - script: sudo rm -r ~/git-projects/QaaS-QuantuMoonLight/; cd ~/git-projects; git clone https://github.com/giuseppepaolisi/QaaS-QuantuMoonLight.git
           - script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
