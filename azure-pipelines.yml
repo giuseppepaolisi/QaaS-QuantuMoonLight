@@ -4,27 +4,26 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- master
+- master #elenco di rami per cui il push attiva un esecuzione
 
 pool:
-  vmImage: ubuntu-latest
-strategy:
-  matrix:
-    Python39:
-      python.version: '3.9'
+  vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+  - task: UsePythonVersion@0 #specifica la versione di python utilizzata. Con strategy vai a definire più versioni di python
+    inputs: # non verse per il deploy
+      versionSpec: '3.9'
 
-#- script: |
- #   python -m pip install --upgrade pip
- #   pip install -r requirements.txt
- # displayName: 'Install dependencies'
-#
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+jobs:
+- deployment: "Deploy Web App"
+  displayName: "My Deploy"
+  pool:
+    vImage: ubuntu-latest
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - script: echo "pipeline start..."
+        - script: cd git-projects/QaaS-QuantuMoonLight
+        - script: conda activate quantumoonlight
+        - script: flask run --host=0.0.0.0
