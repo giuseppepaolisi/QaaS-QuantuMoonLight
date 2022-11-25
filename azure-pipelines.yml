@@ -21,4 +21,5 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - script: echo "pipeline start..."; cd ~; cd git-projects/QaaS-QuantuMoonLight; conda activate quantumoonlight; flask run --host=0.0.0.0
+    
+        - script: echo "pipeline start...";conda activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
