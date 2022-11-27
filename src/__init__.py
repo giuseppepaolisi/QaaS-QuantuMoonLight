@@ -26,8 +26,14 @@ login_manager.login_message_category = "info"
 
 from src.source.model import models
 
-# extensions
-db = SQLAlchemy(app)
+# Create database if it does not exist
+if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
+    create_database(app.config["SQLALCHEMY_DATABASE_URI"])
+    with app.app_context():
+        db.create_all()
+else:
+    with app.app_context():
+        db.create_all()
 
 from src.source.classificazioneDataset import ClassifyControl
 from src.source.preprocessingDataset import PreprocessingControl
