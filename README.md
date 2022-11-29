@@ -1,7 +1,7 @@
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/21276583/174580320-c1fd36fc-0cdc-4f59-9ca8-a877059b21ff.gif) 
 
 This repository was developed for the exam of Cloud Computing 22/23, UNISA <br>
-QuantuMoonLight: A QaaS Platform to Experiment with Quantum Machine Learning for Software Maintenance and Evolution Problem
+QuantuMoonLight: A QaaS Platform to experiment typical Machine Learning pipeline through Quantum Computers
 
 <h1>QuantuMoonLight</h1>
 
@@ -31,7 +31,7 @@ After verifying that you have these prerequisites you will need to proceed in th
 
    <h4>If you want to run on IDE:</h4>
 <ol>
-<li> Import the repository on your IDE (ex. using https://github.com/Robertales/QuantuMoonLight.git)</li>
+<li> Import the repository on your IDE (ex. using https://github.com/giuseppepaolisi/QaaS-QuantuMoonLight)</li>
 <li> Open Anaconda Prompt and install the environment.yml using this command (you can find in ./env/yourOS/environment.yml)<br>
    "conda env create -f environment.yml"
 <li> Set-up the interpreter and the environment on your IDE as a Flask Application</li>
@@ -40,7 +40,7 @@ After verifying that you have these prerequisites you will need to proceed in th
 </ol>
    <h4>Else if you want to run on prompt:</h4>
    <ol>
-<li> clone the github repository</li> (git clone https://github.com/Robertales/QuantuMoonLight)
+<li> clone the github repository</li> (git clone https://github.com/giuseppepaolisi/QaaS-QuantuMoonLight)
 <li>Open Anaconda Prompt and install the environment.yml using this command (you can find in ./env/yourOS/environment.yml)<br>
    "conda env create -f environment.yml" <br>
    next activate the environment<br>
