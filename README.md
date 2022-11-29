@@ -1,7 +1,7 @@
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/21276583/174580320-c1fd36fc-0cdc-4f59-9ca8-a877059b21ff.gif) 
 
-This repository was developed for the tool demo paper <br>
-QuantuMoonLight: A Low-Code Platform to Experiment with Quantum Machine Learning for Software Maintenance and Evolution Problem
+This repository was developed for the exam of Cloud Computing 22/23, UNISA <br>
+QuantuMoonLight: A QaaS Platform to Experiment with Quantum Machine Learning for Software Maintenance and Evolution Problem
 
 <h1>QuantuMoonLight</h1>
 
@@ -9,20 +9,18 @@ QuantuMoonLight is the major user-friendly web platform aimed at quantum computa
 
 The main function of the system is to allow registered users to perform common operation as validation, preprocessing, classifications, regression and more on datasets uploaded by users.
 
-Quantum Machine Learning is a little-known area and therefore we want to extend the interested community, trying to offer a product simple, reliable and useful, using the solutions made available by new Quantum Computing technologies.
+Quantum Machine Learning is a little-known area and therefore we want to extend the interested community, trying to offer a product simple, reliable and useful, using the solutions made available by newest Quantum Computing and Cloud Computing technologies
 
 The goal of the project is to observe the variation of the metrics of a quantum classification algorithm by applying preprocessing techniques that decrease the dimensionality of a dataset in favor of execution time.
 
-The purpose of this project is to present, in detail, the algorithms of the Machine Learning pipeline algorithms used in the QML platform: from validation and feature engineering methods to the creation and use of the quantum classification model.
+Due to this automation of mechanisms, this project enable a new area of computer science that aims to ease software practitioners to intercat with typical pipeline of machine learning 
 
-<h3> Replication Package </h3>
-
- https://figshare.com/articles/online_resource/QUANTUMOONLIGHT_A_Low-Code_Platform_to_Experiment_Quantum_Machine_Learning_for_Software_Maintenance_and_Evolution_Problem/20108336
+The purpose of this project is to provide through the paradigm “Quantum-as-a-Services” the Machine Learning algorithms used in the QML platform: from validation and feature engineering methods to the creation and use of the quantum classification model .
 
 <h2>Local Installation</h2>
 The following prerequisites must be used to install such a platform locally:
 <ul>
-<li>Python >= vers. 3.7;</li>
+<li>Python >= vers. 3.8;</li>
 <li>Anaconda >= vers. 2021.11;</li>
 <li>Editor to set up the code (example PyCharm);</li>
 <li>MySql vers. >= 7.0;</li>
