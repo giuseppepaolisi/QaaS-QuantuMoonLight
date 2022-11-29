@@ -29,7 +29,7 @@ from src.source.model import models
 # Create database if it does not exist
 #if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
 #    create_database(app.config["SQLALCHEMY_DATABASE_URI"])
-#    with app.app_context():
+#    with app.app_context(): ciao
 #        db.create_all()
 #else:
 #    with app.app_context():
