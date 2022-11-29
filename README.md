@@ -17,38 +17,14 @@ Due to this automation of mechanisms, this project enable a new area of computer
 
 The purpose of this project is to provide through the paradigm “Quantum-as-a-Services” the Machine Learning algorithms used in the QML platform: from validation and feature engineering methods to the creation and use of the quantum classification model .
 
-<h2>Local Installation</h2>
-The following prerequisites must be used to install such a platform locally:
-<ul>
-<li>Python >= vers. 3.8;</li>
-<li>Anaconda >= vers. 2021.11;</li>
-<li>Editor to set up the code (example PyCharm);</li>
-<li>MySql vers. >= 7.0;</li>
-<li>MySQL Client(example HeidiSQL);</li>
-</ul>
+<h2>Azure Cloud Services used</h2>
 
-After verifying that you have these prerequisites you will need to proceed in this order:
+<h3>Azure Virtual Machine</h3>
+<h3>Azure DB SQL</h3>
+<h3>Azure Machine Learning</h3>
+<h3>Azure Quantum Computers</h3>
+<h3>Azure DevOps</h3>
 
-   <h4>If you want to run on IDE:</h4>
-<ol>
-<li> Import the repository on your IDE (ex. using https://github.com/giuseppepaolisi/QaaS-QuantuMoonLight)</li>
-<li> Open Anaconda Prompt and install the environment.yml using this command (you can find in ./env/yourOS/environment.yml)<br>
-   "conda env create -f environment.yml"
-<li> Set-up the interpreter and the environment on your IDE as a Flask Application</li>
-<li>Run the code</li>
-<li>Click the link (usually) http://0.0.0.0:5000, the home page will be shown on your browser</li>
-</ol>
-   <h4>Else if you want to run on prompt:</h4>
-   <ol>
-<li> clone the github repository</li> (git clone https://github.com/giuseppepaolisi/QaaS-QuantuMoonLight)
-<li>Open Anaconda Prompt and install the environment.yml using this command (you can find in ./env/yourOS/environment.yml)<br>
-   "conda env create -f environment.yml" <br>
-   next activate the environment<br>
-   "conda activate environment-name"</li>
-<li>cd into the QuantuMoonLight folder of the local copy of the repository</li>
-<li>type in "flask run" and run it</li>
-<li>open the link provided by the cli interface to access your local copy of QuantuMoonLight</li>
-   </ol>
 
    
  
