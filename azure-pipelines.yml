@@ -3,24 +3,25 @@
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
-#trigger:
-#- master #elenco di rami per cui il push attiva un esecuzione
+trigger:
+- master #elenco di rami per cui il push attiva un esecuzione
 
-#pool:
-#  vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
+pool:
+  vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
 
-
-#jobs:
-#- deployment: "QuantuMoonLight_deploy"
-#  displayName: "My_deploy"
-#  continueOnError: true
-#  pool:
-#    vImage: ubuntu-latest
-#  environment: qmlDevOps.QuantuMoonLight-VM
-#  strategy:
-#    runOnce:
-#      deploy:
-#        steps:
-#          - script: sudo kill -9 $(sudo lsof -t -i:5000)
-#          - script: git pull
-#          - script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
+stages:
+    - stage: "DeployStage"
+      jobs:
+      - deployment: "QuantuMoonLight_deploy"
+        displayName: "My_deploy"
+        continueOnError: true
+        pool:
+            vImage: ubuntu-latest
+        environment: qmlDevOps.QuantuMoonLight-VM
+        strategy:
+            runOnce:
+                deploy:
+                    steps:
+                    - script: sudo kill -9 $(sudo lsof -t -i:5000)
+                    - script: git pull
+                    - script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
