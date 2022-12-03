@@ -10,11 +10,11 @@ pool:
   vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
 
 stages:
-    - stage: 'BuildStage'
-      displayName: 'Build Stage'
+#    - stage: 'BuildStage'
+#      displayName: 'Build Stage'
     
-    - stage: 'Test Stage'
-      displayName: 'Test Stage'
+#    - stage: 'TestStage'
+#      displayName: 'Test Stage'
 
     - stage: "DeployStage"
       displayName: "Deploy Stage"
@@ -27,21 +27,31 @@ stages:
         environment: qmlDevOps.QuantuMoonLight-VM
         strategy:
             runOnce:
-                deploy:
+             preDeploy:
+               steps:
+                 - download: current
+                   artifact: drop
+                 - script: echo initialize, cleanup, backup, install
+             deploy:
+               steps:
+                - task: UsePythonVersion@0
+                  inputs:
+                     versionSpec: '3.9'
+                  displayName: 'Use Python 3.9'
+                - task: Bash@3
+                  inputs:
+                    targetType: inline
+                    script: |
+                      echo "starting deployment script run"
+                      source activate quantumoonlight
+                      flask run -h 0.0.0.0
+             on:
+               failure:
                  steps:
-                   - task: UsePythonVersion@0
-                     inputs:
-                       versionSpec: '3.9'
-                     displayName: 'Use Python 3.9'
-                   - task: AzureWebApp@1
-                     displayName: 'Deploy Azure Web App: QaaS - QuantuMoonLight'
-                     inputs:
-                       azureSubscription: $(azureServiceConnectionId)
-                       appName: 'QaaS-QuantuMoonLight'
-                       appType: webAppLinux
-                       package: $(System.DefaultWorkingDirectory)/git-projects/QaaS-QuantuMoonLight/
-                       deploymentMethod: auto
-                       startUpCommand: 'source activate quantumoonlight; flask run -h 0.0.0.0'
+                   - script: echo "This is a failure"
+               success:
+                  steps :
+                    - script: echo "Success"
                      #steps:
                     #- script: sudo kill -9 $(sudo lsof -t -i:5000)
                     #- script: git pull
