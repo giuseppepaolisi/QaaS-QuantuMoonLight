@@ -10,10 +10,17 @@ pool:
   vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
 
 stages:
+    - stage: 'BuildStage'
+      displayName: 'Build Stage'
+    
+    - stage: 'Test Stage'
+      displayName: 'Test Stage'
+
     - stage: "DeployStage"
+      displayName: "Deploy Stage"
       jobs:
       - deployment: "QuantuMoonLight_deploy"
-        displayName: "My_deploy"
+        displayName: "Deploy Job"
         continueOnError: true
         pool:
             vImage: ubuntu-latest
@@ -21,7 +28,21 @@ stages:
         strategy:
             runOnce:
                 deploy:
-                    steps:
-                    - script: sudo kill -9 $(sudo lsof -t -i:5000)
-                    - script: git pull
-                    - script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
+                 steps:
+                   - task: UsePythonVersion@0
+                     inputs:
+                       versionSpec: '3.9'
+                     displayName: 'Use Python 3.9'
+                   - task: AzureWebApp@1
+                     displayName: 'Deploy Azure Web App: QaaS - QuantuMoonLight'
+                     inputs:
+                       azureSubscription: $(azureServiceConnectionId)
+                       appName: 'QaaS-QuantuMoonLight'
+                       appType: webAppLinux
+                       package: $(System.DefaultWorkingDirectory)/git-projects/QaaS-QuantuMoonLight/
+                       deploymentMethod: auto
+                       startUpCommand: 'source activate quantumoonlight; flask run -h 0.0.0.0'
+                     #steps:
+                    #- script: sudo kill -9 $(sudo lsof -t -i:5000)
+                    #- script: git pull
+                    #- script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
