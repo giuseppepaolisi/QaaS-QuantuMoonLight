@@ -35,10 +35,6 @@ stages:
                     git pull --rebase
              deploy:
                steps:
-                - task: UsePythonVersion@0
-                  inputs:
-                     versionSpec: '3.9'
-                  displayName: 'Use Python 3.9'
                 - task: Bash@3
                   inputs:
                     targetType: inline
