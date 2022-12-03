@@ -29,9 +29,10 @@ stages:
             runOnce:
              preDeploy:
                steps:
-                 - download: current
-                   artifact: drop
-                 - script: echo initialize, cleanup, backup, install
+                 - script: |
+                    pwd
+                    cd ~/git-projects/
+                    git pull --rebase
              deploy:
                steps:
                 - task: UsePythonVersion@0
@@ -42,6 +43,7 @@ stages:
                   inputs:
                     targetType: inline
                     script: |
+                      cd ~/git-projects/QaaS-QuantuMoonLight
                       echo "starting deployment script run"
                       source activate quantumoonlight
                       flask run -h 0.0.0.0
