@@ -42,7 +42,7 @@ stages:
                       cd ~/git-projects/QaaS-QuantuMoonLight
                       echo "starting deployment script run"
                       source activate quantumoonlight
-                      flask run -h 0.0.0.0
+                      flask run -h 0.0.0.0 &
              on:
                failure:
                  steps:
