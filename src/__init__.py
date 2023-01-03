@@ -33,8 +33,8 @@ from src.source.model import models
 #        db.create_all()
 #else:
 #    with app.app_context():
-app.app_context()
-db.create_all()
+#app.app_context()
+#db.create_all()
 
 from src.source.classificazioneDataset import ClassifyControl
 from src.source.preprocessingDataset import PreprocessingControl
