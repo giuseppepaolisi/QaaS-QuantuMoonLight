@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'QaaS-QuantuMoonLight'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3BFE24E4C87B4420BAB5407B9ACF3892 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4FFEBC3291D84B94B29CB1D72FCABAD1 }}
