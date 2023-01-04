@@ -43,6 +43,7 @@ stages:
                       cd ~/git-projects/QaaS-QuantuMoonLight
                       echo "starting deployment script run"
                       source activate quantumoonlight
+                      echo "Ambiente attivato"
                       flask run -h 0.0.0.0 
              on:
                failure:
