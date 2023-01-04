@@ -39,7 +39,7 @@ stages:
                   inputs:
                     targetType: inline
                     script: |
-                      sudo su
+                      echo "Start..."
                       cd ~/git-projects/QaaS-QuantuMoonLight
                       echo "starting deployment script run"
                       source activate quantumoonlight
