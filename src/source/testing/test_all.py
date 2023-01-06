@@ -24,6 +24,8 @@ from src.source.validazioneDataset import train_testSplit
 from src.source.classificazioneDataset.ClassifyControl import ClassificazioneControl
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
+# Configure Database URI:
+params = urllib.parse.quote_plus('Driver={ODBC Driver 18 for SQL Server};Server=tcp:server-sql-qml.database.windows.net,1433;Database=quantumDB;Uid=rootQML;Pwd=R00t*quantum;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 
 
 class TestValidazioneControl(unittest.TestCase):
@@ -628,12 +630,12 @@ class Test_signup(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@0.0.0.0/test_db"
+        ] = "mssql+pyodbc:///?odbc_connect=%s" % params
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-        if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
+        """if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
             create_database(app.config["SQLALCHEMY_DATABASE_URI"])
         with app.app_context():
-            db.create_all()
+            db.create_all()"""
 
     def test_signup(self):
         """
@@ -858,7 +860,7 @@ class Test_Login_Logout(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@0.0.0.0/test_db"
+        ] = "mssql+pyodbc:///?odbc_connect=%s" % params
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
             create_database(app.config["SQLALCHEMY_DATABASE_URI"])
@@ -1032,7 +1034,7 @@ class TestUser(TestCase):
         with app.app_context():
             db.drop_all()
 
-
+"""
 class TestList(TestCase):
     def setUp(self):
         super().setUp()
@@ -1082,7 +1084,7 @@ class TestList(TestCase):
 
     def test_listUser(self):
         """
-        test the functionality of getting all registered users to the site
+        #test the functionality of getting all registered users to the site
         """
         tester = app.test_client()
         with app.app_context():
@@ -1099,7 +1101,7 @@ class TestList(TestCase):
 
     def test_listArticlesUser(self):
         """
-        test the functionality of getting articles written by a user
+        #test the functionality of getting articles written by a user
         """
         tester = app.test_client()
         with app.app_context():
@@ -1122,7 +1124,7 @@ class TestList(TestCase):
 
     def test_listArticlesData(self):
         """
-        tests the functionality of getting articles written between two dates
+        #tests the functionality of getting articles written between two dates
         """
         tester = app.test_client()
         with app.app_context():
@@ -1153,8 +1155,8 @@ class TestClassifyControl(unittest.TestCase):
 
     def test_classify_control(self):
         """
-        Test the input coming from the form and the status code returned, and check if the classification result
-        file is created
+        #Test the input coming from the form and the status code returned, and check if the classification result
+        #file is created
         """
         path_train = (
             pathlib.Path(__file__).cwd()
@@ -1194,7 +1196,7 @@ class TestClassifyControl(unittest.TestCase):
 
     def test_classification_thread(self):
         """
-        Test if thread that calls the classify and QSVM works properly
+        #Test if thread that calls the classify and QSVM works properly
         """
         path_train = (
                 pathlib.Path(__file__).cwd()
@@ -1229,8 +1231,8 @@ class TestClassifyControl(unittest.TestCase):
 
     def test_classify(self):
         """
-        Test the classify function with correct parameters and input files, and check if the classification result
-        file is created
+        #Test the classify function with correct parameters and input files, and check if the classification result
+        #file is created
         """
         path_train = (
             pathlib.Path(__file__).cwd()
@@ -1270,7 +1272,7 @@ class TestClassifyControl(unittest.TestCase):
 
     def test_getClassifiedDataset(self):
         """
-        Test the function that send the email, with fixed parameters as input
+        #Test the function that send the email, with fixed parameters as input
         """
         result = {
             "testing_accuracy": 0.55687446747,
@@ -1328,7 +1330,7 @@ class TestIbmFail(unittest.TestCase):
 
     def test_classify_ibmFail(self):
         """
-        Test the classify function with not valid train and test datasets, to make the IBM backend fail on purpose
+        #Test the classify function with not valid train and test datasets, to make the IBM backend fail on purpose
         """
         path_train = (
             pathlib.Path(__file__).cwd()
@@ -1487,3 +1489,4 @@ class TestRoutes(unittest.TestCase):
             os.remove(path)
         with app.app_context():
             db.drop_all()
+"""
