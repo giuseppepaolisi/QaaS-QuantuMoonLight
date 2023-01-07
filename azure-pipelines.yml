@@ -32,7 +32,7 @@ stages:
                  - script: |
                     pwd
                     cd ~/git-projects/QaaS-QuantuMoonLight
-                    git stash .
+                    git stash push -u -m "stash effettuato"
                     git pull --rebase
              deploy:
                steps:
