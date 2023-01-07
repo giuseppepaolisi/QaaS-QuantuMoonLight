@@ -44,7 +44,7 @@ stages:
                       echo "starting deployment script run"
                       source activate quantumoonlight
                       echo "Ambiente attivato"
-                      python3 app.py
+                      nohup flask run -h 0.0.0.o -p 5000 &
              on:
                failure:
                  steps:
