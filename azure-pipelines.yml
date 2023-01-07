@@ -45,7 +45,7 @@ stages:
                       echo "starting deployment script run"
                       source activate quantumoonlight
                       echo "Ambiente attivato"
-                      gunicorn -c gunicorn_config.py app:app
+                      gunicorn -c gunicorn_config.py app:app &
                       echo "Servizio attivo"
              on:
                failure:
