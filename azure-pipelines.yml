@@ -36,11 +36,17 @@ stages:
                     git pull --rebase
              deploy:
                steps:
-                - task: AzureCLI@2
+                - task: Bash@3
                   inputs:
-                    azureSubscription: '09592d54-12d2-4bd0-8370-1991aef267b5'
-                    scriptType: bash
-                    inlineScript: 'gnome-terminal --command "cd ~/git-projects/QaaS-QuantuMoonLight;source activate quantumoonlight;flask run -h 0.0.0.0 -p 5000"'
+                    targetType: inline
+                    script: |
+                      echo "Start..."
+                      cd ~/git-projects/QaaS-QuantuMoonLight
+                      echo "starting deployment script run"
+                      source activate quantumoonlight
+                      echo "Ambiente attivato"
+                      gunicorn -c gunicorn_config.py app:app &
+                      echo "Servizio attivo"
              on:
                failure:
                  steps:
