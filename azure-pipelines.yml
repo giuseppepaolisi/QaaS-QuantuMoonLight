@@ -33,3 +33,11 @@ stages:
               } else {
                 Write-Error "Error starting virtual machine"
               }
+      - job: Run_Web_App
+        dependsOn: Start_VM
+        steps:
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: '09592d54-12d2-4bd0-8370-1991aef267b5'
+              scriptType: bash
+              inlineScript: 'az vm run-command invoke -g QuantuMoonLight-VM_group -n QuantuMoonLight-VM --command-id RunShellScript --scripts "bash ~/git-projects/run-flask-server.sh"'
