@@ -19,42 +19,25 @@ stages:
     - stage: "DeployStage"
       displayName: "Deploy Stage"
       jobs:
-      - deployment: "QuantuMoonLight_deploy"
-        displayName: "Deploy Job"
-        continueOnError: true
-        pool:
-            vImage: ubuntu-latest
-        environment: qmlDevOps.QuantuMoonLight-VM
-        strategy:
-            runOnce:
-             preDeploy:
-               steps:
-                 - script: |
-                    pwd
-                    cd ~/git-projects/QaaS-QuantuMoonLight
-                    git stash push -u -m "stash effettuato"
-                    git pull --rebase
-             deploy:
-               steps:
-                - task: Bash@3
-                  inputs:
-                    targetType: inline
-                    script: |
-                      echo "Start..."
-                      cd ~/git-projects/QaaS-QuantuMoonLight
-                      echo "starting deployment script run"
-                      source activate quantumoonlight
-                      echo "Ambiente attivato"
-                      gunicorn -c gunicorn_config.py app:app &
-                      echo "Servizio attivo"
-             on:
-               failure:
-                 steps:
-                   - script: echo "This is a failure"
-               success:
-                  steps :
-                    - script: echo "Success"
-                     #steps:
-                    #- script: sudo kill -9 $(sudo lsof -t -i:5000)
-                    #- script: git pull
-                    #- script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
+      - job: Start_VM
+        steps:
+        - task: AzurePowerShell@5
+          inputs:
+           azureSubscription: '09592d54-12d2-4bd0-8370-1991aef267b5'
+           ScriptType: InlineScript
+           Inline: |
+             Start-AzVM -ResourceGroupName "QuantuMoonLight-VM_group" -Name "QuantuMoonLight-VM"
+             $status = (Get-AzVM -ResourceGroupName "QuantuMoonLight-VM_group" -Name "QuantuMoonLight-VM").PowerState
+              if ($status -eq "Running") {
+                Write-Host "Virtual machine is running"
+              } else {
+                Write-Error "Error starting virtual machine"
+              }
+      - job: Run_Web_App
+        dependsOn: Start_VM
+        steps:
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: '09592d54-12d2-4bd0-8370-1991aef267b5'
+              scriptType: bash
+              inlineScript: 'az vm run-command invoke -g QuantuMoonLight-VM_group -n QuantuMoonLight-VM --command-id RunShellScript --scripts "bash ~/git-projects/run-flask-server.sh"'
