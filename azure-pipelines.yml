@@ -20,7 +20,7 @@ stages:
         displayName: "Deploy Job"
         continueOnError: true
         pool:
-            vImage: QuantuMoonLight-VM #pool in cui vengono eseguiti i processi della pipeline
+            vImage: qmlDevOps.QuantuMoonLight-VM #pool in cui vengono eseguiti i processi della pipeline
         environment: qmlDevOps.QuantuMoonLight-VM
         strategy:
             runOnce:
