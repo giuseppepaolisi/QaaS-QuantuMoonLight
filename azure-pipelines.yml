@@ -42,7 +42,7 @@ stages:
                       echo "starting deployment script run"
                       source activate quantumoonlight
                       echo "Ambiente attivato"
-                      nohup flask run -h 0.0.0.0 -p 5000 &
+                      nohup gunicorn -c gunicorn_config.py app:app &
                       echo "Servizio attivo"
              on:
                failure:
