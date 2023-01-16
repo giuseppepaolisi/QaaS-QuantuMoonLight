@@ -6,6 +6,9 @@
 trigger:
 - master #elenco di rami per cui il push attiva un esecuzione
 
+pool:
+  vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
+
 stages:
 #    - stage: 'BuildStage'
 #      displayName: 'Build Stage'
@@ -16,15 +19,42 @@ stages:
     - stage: "DeployStage"
       displayName: "Deploy Stage"
       jobs:
-        - job: 
-          steps:
-            - script: |
-                echo "Start..."
-                cd ~/git-projects/QaaS-QuantuMoonLight
-                echo "starting deployment script run"
-                source activate quantumoonlight
-                echo "Ambiente attivato"
-                cd ..
-                bash run-flask-server.sh
-                echo "Servizio attivo"
-                sleep 30
+      - deployment: "QuantuMoonLight_deploy"
+        displayName: "Deploy Job"
+        continueOnError: true
+        pool:
+            vImage: ubuntu-latest
+        environment: qmlDevOps.QuantuMoonLight-VM
+        strategy:
+            runOnce:
+             preDeploy:
+               steps:
+                 - script: |
+                    pwd
+                    cd ~/git-projects/QaaS-QuantuMoonLight
+                    git stash push -u -m "stash effettuato"
+                    git pull --rebase
+             deploy:
+               steps:
+                - task: Bash@3
+                  inputs:
+                    targetType: inline
+                    script: |
+                      echo "starting deployment script run"
+                      source activate quantumoonlight
+                      echo "Ambiente attivato"
+                      sudo systemctl start gunicorn
+                      echo "Servizio attivo"
+             on:
+               failure:
+                 steps:
+                   - script: |
+                      echo "This is a failure"
+                      systemctl status gunicorn.service
+               success:
+                  steps :
+                    - script: echo "Success"
+                     #steps:
+                    #- script: sudo kill -9 $(sudo lsof -t -i:5000)
+                    #- script: git pull
+                    #- script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
