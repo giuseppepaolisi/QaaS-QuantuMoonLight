@@ -44,6 +44,7 @@ stages:
                       echo "Ambiente attivato"
                       nohup gunicorn -c gunicorn_config.py app:app &
                       echo "Servizio attivo"
+                      sleep 60
              on:
                failure:
                  steps:
