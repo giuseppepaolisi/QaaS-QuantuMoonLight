@@ -16,44 +16,15 @@ stages:
     - stage: "DeployStage"
       displayName: "Deploy Stage"
       jobs:
-      - deployment: "QuantuMoonLight_deploy"
-        displayName: "Deploy Job"
-        continueOnError: true
-        pool:
-            vImage: qmlDevOps.QuantuMoonLight-VM #pool in cui vengono eseguiti i processi della pipeline
-        environment: qmlDevOps.QuantuMoonLight-VM
-        strategy:
-            runOnce:
-             preDeploy:
-               steps:
-                 - script: |
-                    pwd
-                    cd ~/git-projects/QaaS-QuantuMoonLight
-                    git stash push -u -m "stash effettuato"
-                    git pull --rebase
-             deploy:
-               steps:
-                - task: Bash@3
-                  inputs:
-                    targetType: inline
-                    script: |
-                      echo "Start..."
-                      cd ~/git-projects/QaaS-QuantuMoonLight
-                      echo "starting deployment script run"
-                      source activate quantumoonlight
-                      echo "Ambiente attivato"
-                      cd ..
-                      bash run-flask-server.sh
-                      echo "Servizio attivo"
-                      sleep 60
-             on:
-               failure:
-                 steps:
-                   - script: echo "This is a failure"
-               success:
-                  steps :
-                    - script: echo "Success"
-                     #steps:
-                    #- script: sudo kill -9 $(sudo lsof -t -i:5000)
-                    #- script: git pull
-                    #- script: source activate quantumoonlight; cd ~; cd git-projects/QaaS-QuantuMoonLight; flask run --host=0.0.0.0
+        - job: 
+          steps:
+            - script: |
+                echo "Start..."
+                cd ~/git-projects/QaaS-QuantuMoonLight
+                echo "starting deployment script run"
+                source activate quantumoonlight
+                echo "Ambiente attivato"
+                cd ..
+                bash run-flask-server.sh
+                echo "Servizio attivo"
+                sleep 30
