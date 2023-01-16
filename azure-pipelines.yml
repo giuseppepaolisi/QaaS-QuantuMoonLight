@@ -42,7 +42,8 @@ stages:
                       echo "starting deployment script run"
                       source activate quantumoonlight
                       echo "Ambiente attivato"
-                      nohup gunicorn -c gunicorn_config.py app:app &
+                      cd ..
+                      bash run-flask-server.sh
                       echo "Servizio attivo"
                       sleep 60
              on:
