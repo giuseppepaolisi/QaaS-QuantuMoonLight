@@ -6,6 +6,9 @@
 trigger:
 - master #elenco di rami per cui il push attiva un esecuzione
 
+pool:
+  vmImage: ubuntu-latest #pool in cui vengono eseguiti i processi della pipeline
+
 stages:
 #    - stage: 'BuildStage'
 #      displayName: 'Build Stage'
@@ -20,7 +23,7 @@ stages:
         displayName: "Deploy Job"
         continueOnError: true
         pool:
-            vImage: qmlDevOps.QuantuMoonLight-VM #pool in cui vengono eseguiti i processi della pipeline
+            vImage: ubuntu-latest
         environment: qmlDevOps.QuantuMoonLight-VM
         strategy:
             runOnce:
@@ -37,17 +40,17 @@ stages:
                   inputs:
                     targetType: inline
                     script: |
-                      echo "Start..."
-                      cd ~/git-projects/QaaS-QuantuMoonLight
                       echo "starting deployment script run"
                       source activate quantumoonlight
                       echo "Ambiente attivato"
-                      flask run -h 0.0.0.0 -p 5000 
+                      sudo systemctl start gunicorn
                       echo "Servizio attivo"
              on:
                failure:
                  steps:
-                   - script: echo "This is a failure"
+                   - script: |
+                      echo "This is a failure"
+                      systemctl status gunicorn.service
                success:
                   steps :
                     - script: echo "Success"
