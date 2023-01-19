@@ -438,8 +438,10 @@ class ClassificazioneControl:
         img = MIMEImage(img_path.read())
         img.add_header('Content-ID', '<image>')
         msg.attach(img)
+        print("\n\n\n\nResult:")
+        print(result)
 
-        if result["error"] == 1:
+        if 'error' in result and result["error"] == 1:
             exception = str(result["exception"])
             if model == "PegasosSVC":
                 msg.attach(
@@ -490,20 +492,21 @@ class ClassificazioneControl:
                 precision = result.get("testing_precision")
                 recall = result.get("testing_recall")
                 f1 = result.get("f1")
-                msg.attach(
-                    MIMEText(
-                        "<center><h3>" +
-                        "Modello: " + result.get("model") +
-                        "<br><br>Testing accuracy: " +
-                        "{:.2%}".format(accuracy) +
-                        "<br><br>Testing precision: " +
-                        "{:.2%}".format(precision) +
-                        "<br><br>Testing recall: " +
-                        "{:.2%}".format(recall) +
-                        "<br><br>Testing f1: " +
-                        "{:.2%}".format(f1) +
-                        "<br><br>Backend used: " + str(backend) +
-                        "</h3></center>", 'html'))
+                if accuracy is not None and precision is not None and recall is not None and f1 is not None: 
+                    msg.attach(
+                        MIMEText(
+                            "<center><h3>" +
+                            "Modello: " + result.get("model") +
+                            "<br><br>Testing accuracy: " +
+                            "{:.2%}".format(accuracy) +
+                            "<br><br>Testing precision: " +
+                            "{:.2%}".format(precision) +
+                            "<br><br>Testing recall: " +
+                            "{:.2%}".format(recall) +
+                            "<br><br>Testing f1: " +
+                            "{:.2%}".format(f1) +
+                            "<br><br>Backend used: " + str(backend) +
+                            "</h3></center>", 'html'))
 
             if result.get("training_time") == -1:
                 msg.attach(
@@ -512,18 +515,20 @@ class ClassificazioneControl:
                         "</h3></center>",
                         'html'))
             else:
-                msg.attach(
-                    MIMEText(
-                        "<center><h3>Training time: " +
-                        result.get("training_time") +
-                        "s</h3></center>",
-                        'html'))
-            msg.attach(
-                MIMEText(
-                    "<center><h3>Total time elapsed: " +
-                    result.get("total_time") +
-                    "s</h3></center>",
-                    'html'))
+                if result.get("training_time") is not None:
+                    msg.attach(
+                        MIMEText(
+                            "<center><h3>Training time: " +
+                            result.get("training_time") +
+                            "s</h3></center>",
+                            'html'))
+            if result.get("total_time") is not None:
+                    msg.attach(
+                        MIMEText(
+                            "<center><h3>Total time elapsed: " +
+                            result.get("total_time") +
+                            "s</h3></center>",
+                            'html'))
 
             if result["no_backend"]:
                 msg.attach(
