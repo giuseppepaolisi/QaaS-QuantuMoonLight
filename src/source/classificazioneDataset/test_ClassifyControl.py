@@ -149,7 +149,7 @@ class TestClassifyControl(unittest.TestCase):
         C_SVC = 1
         C_SVR = 1
         id_dataset = 1
-        user_id = email
+        user_id = "quantumoonlight@gmail.com"
 
         result = ClassificazioneControl().classify(
             path_train,
