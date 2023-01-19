@@ -58,6 +58,26 @@ class ClassificazioneControl:
         id_dataset = request.form.get("id_dataset")
         user_id = request.form.get("User")
 
+        print(request.form.get("pathTrain"))
+        print(request.form.get("pathTest"))
+        print(request.form.get("userpathToPredict"))
+        print(request.form.getlist("features"))
+        print(request.form.get("token"))
+        print(request.form.get("backend"))
+        print(request.form.get("email"))
+        print(request.form.get("model"))
+        print(request.form.get("C"))
+        print(request.form.get("tau"))
+        print(request.form.get("optimizer"))
+        print(request.form.get("loss"))
+        print(request.form.get("max_iter"))
+        print(request.form.get("kernelSVR"))
+        print(request.form.get("kernelSVC"))
+        print(request.form.get("C_SVC"))
+        print(request.form.get("C_SVR"))
+        print(request.form.get("id_dataset"))
+        print(request.form.get("User"))
+
         thread = Thread(
             target=ClassificazioneControl.classification_thread,
             args=(
