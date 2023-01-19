@@ -205,7 +205,7 @@ class TestClassifyControl(unittest.TestCase):
         model = "QSVC"
 
         value = ClassificazioneControl().get_classified_dataset(
-            result, user_path_to_predict, "quantumoonlight@gmail.com", model, backed_selected
+            result, user_path_to_predict, "quantumoonlight@gmail.com", model, backend_selected
         )
         self.assertEqual(value, 1)
 
