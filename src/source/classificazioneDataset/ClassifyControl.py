@@ -366,8 +366,10 @@ class ClassificazioneControl:
                 dataset.precision = result.get("testing_precision") * 100
                 dataset.recall = result.get("testing_recall") * 100
                 dataset.f1 = result.get("f1") * 100
-            dataset.training_time = result.get("training_time")
-            dataset.total_time = result.get("total_time")
+            temp_training_time = result.get("training_time")
+            dataset.training_time = int(temp_training_time)
+            temp_total_time = result.get("total_time")
+            dataset.total_time = int(temp_total_time)
             db.session.commit()
 
             print("Prediction from datapoints set:")
