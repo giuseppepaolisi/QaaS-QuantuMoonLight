@@ -185,7 +185,7 @@ class TestClassifyControl(unittest.TestCase):
         """
         Test the function that send the email, with fixed parameters as input
         """
-        result = {
+        result1 = {
             "testing_accuracy": 0.55687446747,
             "test_success_ratio": 0.4765984595,
             "total_time": str(90.7),
@@ -205,7 +205,7 @@ class TestClassifyControl(unittest.TestCase):
         model = "QSVC"
 
         value = ClassificazioneControl().get_classified_dataset(
-            result, user_path_to_predict, "quantumoonlight@gmail.com", model, backend_selected
+            result1, user_path_to_predict, "quantumoonlight@gmail.com", model, backend_selected
         )
         self.assertEqual(value, 1)
 
