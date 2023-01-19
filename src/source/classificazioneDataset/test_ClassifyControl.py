@@ -185,7 +185,7 @@ class TestClassifyControl(unittest.TestCase):
         """
         Test the function that send the email, with fixed parameters as input
         """
-        result = {
+        result1 = {
             "testing_accuracy": 0.55687446747,
             "test_success_ratio": 0.4765984595,
             "total_time": str(90.7),
@@ -205,7 +205,7 @@ class TestClassifyControl(unittest.TestCase):
         model = "QSVC"
 
         value = ClassificazioneControl().get_classified_dataset(
-            result, user_path_to_predict, "quantumoonlight@gmail.com", model, backend_selected
+            result1, user_path_to_predict, "quantumoonlight@gmail.com", model, backend_selected
         )
         self.assertEqual(value, 1)
 
@@ -263,6 +263,18 @@ class TestIbmFail(unittest.TestCase):
         token = "43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe519691" \
                 "a7ad17643eecbe13d1c8c4adccd2"
         backend_selected = "aer_simulator"
+        model = "QSVC"
+        C = 1000
+        tau = 100
+        optimizer = "SLSQP"
+        loss = "squared_error"
+        max_iter = 100
+        kernelSVR = "rbf"
+        kernelSVC = "rbf"
+        C_SVC = 1
+        C_SVR = 1
+        id_dataset = 1
+        user_id = "quantumoonlight@gmail.com"
 
         result = ClassificazioneControl().classify(
             path_train,
@@ -271,6 +283,18 @@ class TestIbmFail(unittest.TestCase):
             features,
             token,
             backend_selected,
+            model,
+            C,
+            tau,
+            optimizer,
+            loss,
+            max_iter,
+            kernelSVR,
+            kernelSVC,
+            C_SVC,
+            C_SVR,
+            id_dataset,
+            user_id
         )
         self.assertEqual(result, 1)
         self.assertFalse(
