@@ -209,8 +209,11 @@ class ClassificazioneControl:
         result["model"] = model
         provider = ""
         qubit = len(features)
+        print("\n\n\n\n\nuser")
+        print(user_id)
         user = User.query.filter_by(email=user_id).first()
-
+        print("\n\n\n\n\nuser")
+        print(user["email"])
         if user.isResearcher:
             Researcher = True
         else:
@@ -367,9 +370,9 @@ class ClassificazioneControl:
                 dataset.recall = result.get("testing_recall") * 100
                 dataset.f1 = result.get("f1") * 100
             temp_training_time = result.get("training_time")
-            dataset.training_time = int(temp_training_time)
+            dataset.training_time = int(float(temp_training_time))
             temp_total_time = result.get("total_time")
-            dataset.total_time = int(temp_total_time)
+            dataset.total_time = int(float(temp_total_time))
             db.session.commit()
 
             print("Prediction from datapoints set:")
