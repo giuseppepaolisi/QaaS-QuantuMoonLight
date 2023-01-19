@@ -296,7 +296,7 @@ class TestIbmFail(unittest.TestCase):
             id_dataset,
             user_id
         )
-        self.assertEqual(result, 1)
+        self.assertEqual(result["error"], 1)
         self.assertFalse(
             exists(
                 pathlib.Path(__file__).parent
