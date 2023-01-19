@@ -138,6 +138,18 @@ class TestClassifyControl(unittest.TestCase):
         token = "43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe519" \
                 "691a7ad17643eecbe13d1c8c4adccd2"
         backend_selected = "aer_simulator"
+        model = "QSVC"
+        C = 1000
+        tau = 100
+        optimizer = "SLSQP"
+        loss = "squared_error"
+        max_iter = 100
+        kernelSVR = "rbf"
+        kernelSVC = "rbf"
+        C_SVC = 1
+        C_SVR = 1
+        id_dataset = 1
+        user_id = email
 
         result = ClassificazioneControl().classify(
             path_train,
@@ -146,6 +158,18 @@ class TestClassifyControl(unittest.TestCase):
             features,
             token,
             backend_selected,
+            model,
+            C,
+            tau,
+            optimizer,
+            loss,
+            max_iter,
+            kernelSVR,
+            kernelSVC,
+            C_SVC,
+            C_SVR,
+            id_dataset,
+            user_id
         )
 
         self.assertNotEqual(result, 1)
