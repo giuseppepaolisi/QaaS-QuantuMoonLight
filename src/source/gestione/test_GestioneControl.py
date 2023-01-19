@@ -13,7 +13,7 @@ class TestUser(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@0.0.0.0/test_db"
+        ] = 'mysql://root:root@localhost:3306/test_db'
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         tester = app.test_client(self)
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
@@ -91,7 +91,7 @@ class TestList(TestCase):
         super().setUp()
         app.config[
             "SQLALCHEMY_DATABASE_URI"
-        ] = "mysql://root@0.0.0.0/test_db"
+        ] = 'mysql://root:root@localhost:3306/test_db'
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         tester = app.test_client(self)
         if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
