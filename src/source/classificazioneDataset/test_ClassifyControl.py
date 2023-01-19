@@ -75,9 +75,22 @@ class TestClassifyControl(unittest.TestCase):
                 "91a7ad17643eecbe13d1c8c4adccd2"
         backend_selected = "aer_simulator"
         email = "quantumoonlight@gmail.com"
+        model = "QSVC"
+        C = False
+        tau = False
+        optimizer = False
+        loss = False
+        max_iter = False
+        kernelSVR = False
+        kernelSVC = False
+        C_SVC = False
+        C_SVR = False
+        id_dataset = False
+        user_id = False
 
         result = ClassificazioneControl().classification_thread(path_train, path_test, path_prediction, features,
-                                                                token, backend_selected, email)
+                                                                token, backend_selected, email, model, C, tau, optimizer, loss, max_iter, kernelSVR,
+                                                                kernelSVC, C_SVC, C_SVR, id_dataset, user_id)
 
         self.assertNotEqual(result, 1)
         self.assertTrue(
