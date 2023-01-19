@@ -201,8 +201,11 @@ class TestClassifyControl(unittest.TestCase):
             pathlib.Path(__file__).cwd() / "testingFiles" / "doPrediction.csv"
         )
 
+        backend_selected = "aer_simulator"
+        model = "QSVC"
+
         value = ClassificazioneControl().get_classified_dataset(
-            result, user_path_to_predict, "quantumoonlight@gmail.com"
+            result, user_path_to_predict, "quantumoonlight@gmail.com", model, backed_selected
         )
         self.assertEqual(value, 1)
 
