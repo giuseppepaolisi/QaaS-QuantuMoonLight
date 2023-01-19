@@ -209,11 +209,7 @@ class ClassificazioneControl:
         result["model"] = model
         provider = ""
         qubit = len(features)
-        print("\n\n\n\n\nuser")
-        print(user_id)
         user = User.query.filter_by(email=user_id).first()
-        print("\n\n\n\n\nuser")
-        print(user["email"])
         if user.isResearcher:
             Researcher = True
         else:
