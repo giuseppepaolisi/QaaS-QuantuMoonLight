@@ -67,6 +67,7 @@ class GestioneControl:
 
         return render_template("adminPage.html")
 
+    @classmethod
     def getListaUser():
         """
         the function returns the list of registered users
@@ -85,6 +86,7 @@ class GestioneControl:
         """
         return Dataset.query.all()
 
+    @classmethod
     def getListaArticlesData(data1, data2):
         """
         the function returns the list of Article
@@ -94,6 +96,7 @@ class GestioneControl:
         """
         return Article.query.filter(Article.data.between(data1, data2))
 
+    @classmethod
     def getListaArticlesUser(email):
         """
         the function returns the list of Article
