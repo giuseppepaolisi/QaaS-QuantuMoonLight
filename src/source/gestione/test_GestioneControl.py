@@ -114,8 +114,8 @@ class TestList(TestCase):
                 body="primobody",
                 category="primaCat",
                 data=datetime(2021, 12, 25),
-                authorized=True,
-                label="article"
+                authorized=1,
+                label="Article"
             )
             art2 = Article(
                 email_user="mariorossi12@gmail.com",
@@ -124,8 +124,8 @@ class TestList(TestCase):
                 body="secondoBody",
                 category="secondaCat",
                 data=datetime(2022, 1, 1),
-                authorized = True,
-                label = "article"
+                authorized = 1,
+                label = "Article"
             )
             db.session.add(user1)
             db.session.add(user2)
