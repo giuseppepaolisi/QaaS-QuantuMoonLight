@@ -97,7 +97,7 @@ class TestList(TestCase):
                 username="Antonio de Curtis ",
                 name="Antonio",
                 surname="De Curtis",
-                token = "43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe519691a7ad17643eecbe13d1c8c4adccd2"
+                token="43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe519691a7ad17643eecbe13d1c8c4adccd2"
             )
             user2 = User(
                 email="giuseppeverdi@gmail.com",
@@ -113,7 +113,9 @@ class TestList(TestCase):
                 author = "Antonio de Curtis ",
                 body="primobody",
                 category="primaCat",
-                data=datetime(2021, 12, 25)
+                data=datetime(2021, 12, 25),
+                authorized=True,
+                label="article"
             )
             art2 = Article(
                 email_user="mariorossi12@gmail.com",
@@ -121,7 +123,9 @@ class TestList(TestCase):
                 author="Antonio de Curtis ",
                 body="secondoBody",
                 category="secondaCat",
-                data=datetime(2022, 1, 1)
+                data=datetime(2022, 1, 1),
+                authorized = True,
+                label = "article"
             )
             db.session.add(user1)
             db.session.add(user2)
