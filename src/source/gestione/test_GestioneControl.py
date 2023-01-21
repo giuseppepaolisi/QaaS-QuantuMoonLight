@@ -1,23 +1,20 @@
 import datetime
 from datetime import datetime
 from unittest import TestCase
+import urllib.parse
 
 from sqlalchemy_utils import database_exists, create_database
 
 from src import app, db
 from src.source.model.models import User, Article
 
-
+params = urllib.parse.quote_plus('Driver={ODBC Driver 18 for SQL Server};Server=tcp:server-sql-qml.database.windows.net,1433;Database=test_db;Uid=rootQML;Pwd=R00t*quantum;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 class TestUser(TestCase):
     def setUp(self):
         super().setUp()
-        app.config[
-            "SQLALCHEMY_DATABASE_URI"
-        ] = 'mysql://root:root@localhost:3306/test_db'
+        app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         tester = app.test_client(self)
-        if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
-            create_database(app.config["SQLALCHEMY_DATABASE_URI"])
         with app.app_context():
             db.create_all()
             user = User(
@@ -89,13 +86,9 @@ class TestUser(TestCase):
 class TestList(TestCase):
     def setUp(self):
         super().setUp()
-        app.config[
-            "SQLALCHEMY_DATABASE_URI"
-        ] = 'mysql://root:root@localhost:3306/test_db'
+        app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         tester = app.test_client(self)
-        if not database_exists(app.config["SQLALCHEMY_DATABASE_URI"]):
-            create_database(app.config["SQLALCHEMY_DATABASE_URI"])
         with app.app_context():
             db.create_all()
             user1 = User(
@@ -104,6 +97,7 @@ class TestList(TestCase):
                 username="Antonio de Curtis ",
                 name="Antonio",
                 surname="De Curtis",
+                token = "43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe519691a7ad17643eecbe13d1c8c4adccd2"
             )
             user2 = User(
                 email="giuseppeverdi@gmail.com",
@@ -111,20 +105,23 @@ class TestList(TestCase):
                 username="giuVerdiProXX",
                 name="Giuseppe",
                 surname="Verdi",
+                token="43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe519691a7ad17643eecbe13d1c8c4adccd2"
             )
             art1 = Article(
                 email_user="mariorossi12@gmail.com",
                 title="BuonNatale",
+                author = "Antonio de Curtis ",
                 body="primobody",
                 category="primaCat",
-                data=datetime(2021, 12, 25),
+                data=datetime(2021, 12, 25)
             )
             art2 = Article(
                 email_user="mariorossi12@gmail.com",
                 title="BuonCapodanno",
+                author="Antonio de Curtis ",
                 body="secondoBody",
                 category="secondaCat",
-                data=datetime(2022, 1, 1),
+                data=datetime(2022, 1, 1)
             )
             db.session.add(user1)
             db.session.add(user2)
