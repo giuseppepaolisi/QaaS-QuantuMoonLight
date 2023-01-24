@@ -36,7 +36,7 @@ class GestioneControl:
         return "List of User or article"
 
     @app.route("/removeUser/", methods=["GET", "POST"])
-    def removeUser(self):
+    def removeUser():
         """
         the function allows an administrator to delete a user from the database
 
@@ -50,7 +50,7 @@ class GestioneControl:
         return render_template("index.html")
 
     @app.route("/ModifyUserByAdmin/", methods=["GET", "POST"])
-    def modifyUserProfile(self):
+    def modifyUserProfile():
         """
         the function allows an administrator to modify user information
 
@@ -68,7 +68,7 @@ class GestioneControl:
         return render_template("adminPage.html")
 
     @classmethod
-    def getListaUser(self):
+    def getListaUser():
         """
         the function returns the list of registered users
 
@@ -77,7 +77,7 @@ class GestioneControl:
         """
         return User.query.all()
 
-    def getListaDataset(self):
+    def getListaDataset():
         """
         the function returns the list of uploaded datasets
 
@@ -107,7 +107,7 @@ class GestioneControl:
         return Article.query.filter_by(email_user=email).all()
 
     @app.route("/sendEmailNewsletter/", methods=["GET", "POST"])
-    def sendEmailNewsletter(self):
+    def sendEmailNewsletter():
         """
           the function allows an administrator to send an email to users registered for the newsletter
 
