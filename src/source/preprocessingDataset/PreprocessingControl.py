@@ -1,6 +1,6 @@
 import os
 import pathlib
-
+import pandas as pd
 from flask import request, Response
 
 from src import app
@@ -27,10 +27,10 @@ class PreprocessingControl:
         numColsFE = request.form.get("numColsFE", type=int)
         numColsFS = request.form.get("numColsFS", type=int)
         model = request.form.get("model")
-        if model != "None":
-            classification = True
-        else:
+        if model == None or model == "None":
             classification = False
+        else:
+            classification = True
 
         # Cartella dell'utente dove scrivere tutti i risultati
         pathPC = pathlib.Path(userpath).parents[0]
@@ -51,13 +51,27 @@ class PreprocessingControl:
 
         numRaws = utils.numberOfRows(userpath)
         numCols = utils.numberOfColumns(userpath)
-        if featureExtraction and numColsFE > numCols:
-            numColsFE=numCols
-        if featureSelection and numColsFS > numCols:
-            numColsFS = numCols
-        if prototypeSelection and numRawsPS > numRaws:
-            numRawsPS=numRaws
+        if featureExtraction == True or featureExtraction == "True":
+            if numColsFE > numCols:
+                numColsFE=numCols
+        if featureSelection == True or featureSelection == "True":
+            print("++++" + featureSelection)
+            if numColsFS > numCols:
+                numColsFS = numCols
+        if prototypeSelection == True or prototypeSelection == "True":
+            if numRawsPS > numRaws:
+                numRawsPS=numRaws
 
+        print("\n\n\t\t\t\tControllo Valoti")
+        print(userpath)
+        print(userpathToPredict)
+        #print(prototypeSelection)
+        print(featureExtraction)
+        print(featureSelection)
+        print(numRawsPS)
+        print(numColsFE)
+        print(numColsFS)
+        print(model)
 
         PreprocessingControl.preprocessing(
             userpath,
@@ -110,13 +124,17 @@ class PreprocessingControl:
         pathTrain = pathPC / "Data_training.csv"
         pathTest = pathPC / "Data_testing.csv"
 
-        if prototypeSelection:
+        #print(f"prototypeSelection è {'uguale a' if prototypeSelection else 'diverso da'} True")
+        #print("Sono una prototype? " + str(prototypeSelection))
+
+        if prototypeSelection == True or prototypeSelection == "True":
+            print("\n\n\t\tsono nell'if della prototype selection")
             pathTrain = callPS.callPrototypeSelection(
                 pathTrain,
                 numRowsPS,
             )  # create 'reducedTrainingPS.csv'
 
-        if featureExtraction or featureSelection:
+        if featureExtraction == True or featureSelection == True  or featureExtraction == "True" or featureSelection == "True":
             pathTrain, pathTest = featureExtraction_Selection.callFeatureExtraction_Selection(
                 featureSelection,
                 featureExtraction,
