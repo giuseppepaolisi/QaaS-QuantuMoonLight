@@ -15,8 +15,12 @@ stages:
     
     - stage: 'TestStage'
       displayName: 'Test Stage'
+      pool:
+          vImage: ubuntu-latest
       jobs:
         - job: 'Test_job'
+          strategy:
+           parallel: 1
           steps:
             - task: Bash@3
               inputs:
@@ -33,6 +37,8 @@ stages:
       - deployment: "QuantuMoonLight_deploy"
         displayName: "Deploy Job"
         continueOnError: true
+        pool:
+            vImage: ubuntu-latest
         environment: qmlDevOps.QuantuMoonLight-VM
         strategy:
             runOnce:
