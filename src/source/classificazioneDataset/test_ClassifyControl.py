@@ -89,12 +89,9 @@ class TestClassifyControl(unittest.TestCase):
                                                                 user_id)
 
         self.assertNotEqual(result, 1)
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
         self.assertTrue(
-            exists(
-                os.getcwd()
-                / "testingFiles"
-                / "classifiedFile.csv"
-            )
+            exists(file_path)
         )
 
     def test_classify(self):
@@ -145,33 +142,28 @@ class TestClassifyControl(unittest.TestCase):
         )
 
         self.assertNotEqual(result, 1)
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
+
         self.assertTrue(
-            exists(
-                os.getcwd()
-                / "testingFiles"
-                / "classifiedFile.csv"
-            )
+            exists(file_path)
         )
 
     def test_getClassifiedDataset(self):
         """
         Test the function that send the email, with fixed parameters as input
         """
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
         result1 = {
             "testing_accuracy": 0.55687446747,
             "test_success_ratio": 0.4765984595,
             "total_time": str(90.7),
             "no_backend": True
         }
-        open(
-            os.getcwd()
-            / "testingFiles"
-            / "classifiedFile.csv",
+        open(file_path,
             "w",
         )
-        user_path_to_predict = (
-            os.getcwd() / "testingFiles" / "doPrediction.csv"
-        )
+
+        user_path_to_predict = os.path.join(os.getcwd(), "testingFiles", "doPrediction.csv")
 
         backend_selected = "aer_simulator"
         model = "QSVC"
@@ -182,36 +174,19 @@ class TestClassifyControl(unittest.TestCase):
         self.assertEqual(value, 1)
 
     def tearDown(self):
-        if os.path.exists(
-            os.getcwd()
-            / "testingFiles"
-            / "classifiedFile.csv"
-        ):
-            os.remove(
-                os.getcwd()
-                / "testingFiles"
-                / "classifiedFile.csv"
-            )
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
 
 class TestIbmFail(unittest.TestCase):
 
     def setUp(self):
-        if os.path.exists(
-            os.getcwd()
-            / "testingFiles"
-            / "classifiedFile.csv"
-        ):
-            os.remove(
-                os.getcwd()
-                / "testingFiles"
-                / "classifiedFile.csv"
-            )
-        open(
-            os.getcwd()
-            / "testingFiles"
-            / "emptyFile.csv",
-            "w",
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
+        file_path1 = os.path.join(os.getcwd(), "testingFiles", "emptyFile.csv")
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        open(file_path1, "w",
         ).write("1234567890987654321")
 
     def test_classify_ibmFail(self):
@@ -260,22 +235,12 @@ class TestIbmFail(unittest.TestCase):
             user_id
         )
         self.assertEqual(result["error"], 1)
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
         self.assertFalse(
-            exists(
-                os.getcwd()
-                / "testingFiles"
-                / "classifiedFile.csv"
-            )
+            exists(file_path)
         )
 
     def tearDown(self) -> None:
-        if os.path.exists(
-            os.getcwd()
-            / "testingFiles"
-            / "classifiedFile.csv"
-        ):
-            os.remove(
-                os.getcwd()
-                / "testingFiles"
-                / "classifiedFile.csv"
-            )
+        file_path = os.path.join(os.getcwd(), "testingFiles", "classifiedFile.csv")
+        if os.path.exists(file_path ):
+            os.remove(file_path)
