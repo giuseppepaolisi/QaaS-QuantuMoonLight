@@ -17,19 +17,9 @@ class TestClassifyControl(unittest.TestCase):
         Test the input coming from the form and the status code returned, and check if the classification result
         file is created
         """
-        path_train = (
-            pathlib.Path(__file__).cwd()
-            / "testingFiles"
-            / "DataSetTrainPreprocessato.csv"
-        )
-        path_test = (
-            pathlib.Path(__file__).cwd()
-            / "testingFiles"
-            / "DataSetTestPreprocessato.csv"
-        )
-        path_prediction = (
-            pathlib.Path(__file__).cwd() / "testingFiles" / "doPrediction.csv"
-        )
+        path_train = os.path.join(os.path.dirname(__file__), "/testingFiles/DataSetTrainPreprocessato.csv")
+        path_test = path_train = os.path.join(os.path.dirname(__file__), "/testingFiles/doPrediction.csv")
+        path_prediction = os.path.join(os.path.dirname(__file__), "/testingFiles/DataSetTestPreprocessato.csv")
         features = utils.createFeatureList(2)
         token = "43a75c20e78cef978267a3bdcdb0207dab62575c3c9da494a1cd344022abc8a326ca1a9b7ee3f533bb7ead73a5f9fe5196" \
                 "91a7ad17643eecbe13d1c8c4adccd2"
