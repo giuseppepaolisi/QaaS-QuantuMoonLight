@@ -12,25 +12,6 @@ pool:
 stages:
 #    - stage: 'BuildStage'
 #      displayName: 'Build Stage'
-    
-    - stage: 'TestStage'
-      displayName: 'Test Stage'
-      pool:
-          vImage: ubuntu-latest
-      jobs:
-        - job: 'Test_job'
-          strategy:
-           parallel: 1
-          steps:
-            - task: Bash@3
-              inputs:
-                targetType: inline
-                script: |
-                 source activate quantumoonlight
-                 cd ~/git-projects/QaaS-QuantuMoonLight/src/source/cassificazioneDataset
-                 pytest
-                 cd ~/git-projects/QaaS-QuantuMoonLight/src/source/gestione
-                 pytest
     - stage: "DeployStage"
       displayName: "Deploy Stage"
       jobs:
@@ -49,6 +30,11 @@ stages:
                     cd ~/git-projects/QaaS-QuantuMoonLight
                     git stash push -u -m "stash effettuato"
                     git pull --rebase
+                    source activate quantumoonlight
+                    cd ~/git-projects/QaaS-QuantuMoonLight/src/source/cassificazioneDataset
+                    pytest
+                    cd ~/git-projects/QaaS-QuantuMoonLight/src/source/gestione
+                    pytest
              deploy:
                steps:
                 - task: Bash@3
