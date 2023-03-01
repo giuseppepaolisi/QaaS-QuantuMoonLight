@@ -12,10 +12,6 @@ pool:
 stages:
 #    - stage: 'BuildStage'
 #      displayName: 'Build Stage'
-    
-#    - stage: 'TestStage'
-#      displayName: 'Test Stage'
-
     - stage: "DeployStage"
       displayName: "Deploy Stage"
       jobs:
@@ -34,6 +30,11 @@ stages:
                     cd ~/git-projects/QaaS-QuantuMoonLight
                     git stash push -u -m "stash effettuato"
                     git pull --rebase
+                    source activate quantumoonlight
+                    cd ~/git-projects/QaaS-QuantuMoonLight/src/source/cassificazioneDataset
+                    pytest
+                    cd ~/git-projects/QaaS-QuantuMoonLight/src/source/gestione
+                    pytest
              deploy:
                steps:
                 - task: Bash@3
