@@ -4,15 +4,20 @@ FROM continuumio/anaconda3:latest
 # Set working directory
 WORKDIR /app
 
-# Copy requirements file
-COPY /env/LINUX/environment.yml .
+# Copy environment file
+COPY env/LINUX/environment.yml .
 
-# Install Anaconda environment
-RUN conda env create -f environment.yml
+# Create Anaconda environment
+RUN conda env create -f environment.yml && conda clean -afy
+
+# Set shell to bash
+SHELL ["/bin/bash", "--login", "-c"]
 
 # Activate environment
-RUN echo "conda activate quantumoonlight" >> ~/.bashrc
-SHELL ["/bin/bash", "--login", "-c"]
+ENV PATH /opt/conda/envs/quantumoonlight/bin:$PATH
+
+# copy library
+COPY env/base.py ../opt/conda/envs/quantumoonlight/lib/python3.9/site-packages/deap/
 
 # Copy application code
 COPY . /app
