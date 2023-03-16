@@ -9,16 +9,4 @@ stages:
   jobs:
   - deployment: Job
     environment: Lock_environment
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: Docker@2
-            displayName: 'Build e push dell''immagine Docker'
-            inputs:
-              command: 'buildAndPush'
-              containerRegistry: 'Docker Hub Connection'
-              repository: 'skipper98/quantumoonlight'
-              dockerfile: '**/Dockerfile'
-              tags: 'latest'
 
