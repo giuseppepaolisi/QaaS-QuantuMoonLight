@@ -7,10 +7,11 @@ resources:
 variables:
   imageName: 'skipper98/quantumoonlight'
   tag: 'latest'
+  containerRegistryServiceConnection: 'docker.io'
   # DOCKER_BUILDKIT: 1
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 stages:
   - stage: Build
@@ -18,10 +19,13 @@ stages:
     jobs:
       - job: Build
         displayName: 'Build and push image'
+        pool:
+          vmImage: 'ubuntu-latest'
         steps:
-        - task: Docker@2
+        - task: Docker@2 # viene utilizzato per costruire e caricare l'immagine Docker sul registro Docker di Azure
           displayName: Build an image
           inputs:
+            containerRegistry: $(containerRegistryServiceConnection)
             repository: $(imageName)
             command: 'buildAndPush'
             dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
@@ -31,9 +35,12 @@ stages:
           displayName: 'Publish pipeline artifact'
           inputs:
             targetPath: '$(Build.ArtifactStagingDirectory)/docker'
+    
       - job: Deploy
         displayName: 'Deploy'
         dependsOn: Build
+        pool:
+          vmImage: 'ubuntu-latest'
         steps:
         - task: DownloadPipelineArtifact@2
           displayName: Download pipeline artifact
@@ -43,8 +50,9 @@ stages:
         - task: DockerCompose@0
           displayName: Deploy with Docker Compose
           inputs:
-            containerregistrytype: 'None'
-            azureContainerRegistry: $(imageName)
+            containerregistrytype: 'Azure Container Registry'
+            azureSubscriptionEndpoint: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
+            azureContainerRegistry: 'myRegistry'
             dockerComposeFile: '$(Pipeline.Workspace)/docker/docker-compose.yml'
             action: 'Run services'
             additionalDockerComposeFiles: |
