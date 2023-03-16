@@ -9,7 +9,7 @@ steps:
   displayName: 'Build e push dell''immagine Docker'
   inputs:
     command: 'buildAndPush'
-    containerRegistry: 'dockerhub'
+    containerRegistry: 'Docker Hub Connection'
     repository: 'skipper98/quantumoonlight'
     dockerfile: '**/Dockerfile'
     tags: 'latest'
