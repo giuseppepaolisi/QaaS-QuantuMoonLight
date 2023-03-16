@@ -3,10 +3,8 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
 strategy:
-  parallel: 1
-
+  maxParallel: 1
 steps:
 - task: Docker@2
   displayName: 'Build e push dell''immagine Docker'
