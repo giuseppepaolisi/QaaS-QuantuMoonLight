@@ -10,11 +10,11 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: Docker@2
-            displayName: 'Build e push dell''immagine Docker'
+          
+          - task: AzureWebAppContainer@1
+            displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
             inputs:
-              command: 'buildAndPush'
-              containerRegistry: 'Docker Hub Connection'
-              repository: 'skipper98/quantumoonlight'
-              dockerfile: '**/Dockerfile'
-              tags: 'latest'
+              appName: 'quantumoonlight'
+              containers: 'skipper98/quantumoonlight:latest'
+              azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
+              resourceGroupName: 'quantumoonlight-resource'
