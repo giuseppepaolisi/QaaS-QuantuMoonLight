@@ -4,8 +4,6 @@ pool: Default
 stages:
 - stage: Stage
   jobs:
-  - deployment: Deployment
-    environment: Default
   - job: Job
     steps:
     - task: Docker@2
