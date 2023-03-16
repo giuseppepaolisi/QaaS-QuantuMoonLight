@@ -4,8 +4,6 @@ pool:
 stages:
 - stage: Stage
   jobs:
-  - deployment: Job
-    environment: Lock_environment
   - job: Job
     steps:
     - task: Docker@2
