@@ -3,7 +3,7 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-lockBehavior: sequential
+  lockBehavior: sequential
 stages:
 - stage: Stage
   jobs:
