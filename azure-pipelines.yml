@@ -27,8 +27,4 @@ stages:
             dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
             tags: |
               $(tag)
-        - task: PublishPipelineArtifact@1 
-          displayName: 'Publish pipeline artifact'
-          inputs:
-            targetPath: '$(Build.ArtifactStagingDirectory)/docker'
 
