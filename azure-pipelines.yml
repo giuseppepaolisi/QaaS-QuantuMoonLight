@@ -3,12 +3,10 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-lockBehavior: sequential
 stages:
 - stage: Stage
   jobs:
   - deployment: Job
-    environment: Lock_environment
     strategy:
       runOnce:
         deploy:
