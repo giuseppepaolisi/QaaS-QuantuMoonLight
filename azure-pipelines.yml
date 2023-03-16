@@ -1,9 +1,20 @@
 pool:
   vmImage: 'ubuntu-latest'
-lockBehavior: runLatest
 stages:
-- stage: A
+- stage: Stage
+  lockBehavior: sequential
   jobs:
-  - job: Job
-    steps:
-    - script: Hey!
+  - deployment: Job
+    environment: Lock_environment
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Docker@2
+            displayName: 'Build e push dell''immagine Docker'
+            inputs:
+              command: 'buildAndPush'
+              containerRegistry: 'Docker Hub Connection'
+              repository: 'skipper98/quantumoonlight'
+              dockerfile: '**/Dockerfile'
+              tags: 'latest'
