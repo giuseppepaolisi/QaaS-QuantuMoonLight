@@ -1,9 +1,8 @@
 pool:
   vmImage: 'ubuntu-latest'
-  lockBehavior: sequential
-
 stages:
 - stage: Stage
+  lockBehavior: sequential
   jobs:
   - deployment: Job
     environment: Lock_environment
