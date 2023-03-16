@@ -1,8 +1,8 @@
 pool:
   vmImage: 'ubuntu-latest'
+lockBehavior: runLatest
 stages:
 - stage: A
-  lockBehavior: sequential
   jobs:
   - job: Job
     steps:
