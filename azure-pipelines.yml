@@ -1,10 +1,10 @@
-pool:
-  vmImage: 'ubuntu-latest'
-  lockBehavior: sequential
+pool: Default
+  #vmImage: 'ubuntu-latest'
+  #lockBehavior: sequential
 stages:
 - stage: Stage
   jobs:
-  - deployment: Job
+  - deployment: Deployment
     environment: Default
   - job: Job
     steps:
