@@ -3,7 +3,9 @@ pool:
   lockBehavior: sequential
 stages:
 - stage: Stage
-  jobs: 
+  jobs:
+  - deployment: Job
+    environment: Default
   - job: Job
     steps:
     - task: Docker@2
