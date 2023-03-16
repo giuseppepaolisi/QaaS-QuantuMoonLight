@@ -1,0 +1,66 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  imageName: 'skipper98/quantumoonlight'
+  tag: 'latest'
+  containerRegistryServiceConnection: 'docker.io'
+  # DOCKER_BUILDKIT: 1
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Build
+    displayName: 'Build and push image'
+    jobs:
+      - job: Build
+        displayName: 'Build and push image'
+        steps:
+        - task: Docker@2 # viene utilizzato per costruire e caricare l'immagine Docker sul registro Docker di Azure
+          displayName: Build an image
+          inputs:
+            containerRegistry: $(containerRegistryServiceConnection)
+            repository: $(imageName)
+            command: 'buildAndPush'
+            dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+            tags: |
+              $(tag)
+        - task: PublishPipelineArtifact@1 
+          displayName: 'Publish pipeline artifact'
+          inputs:
+            targetPath: '$(Build.ArtifactStagingDirectory)/docker'
+    
+      - job: Deploy
+        displayName: 'Deploy'
+        dependsOn: Build
+        steps:
+        - task: DownloadPipelineArtifact@2
+          displayName: Download pipeline artifact
+          inputs:
+            artifactName: 'docker'
+            targetPath: '$(Pipeline.Workspace)/docker'
+        - task: DockerCompose@0
+          displayName: Deploy with Docker Compose
+          inputs:
+            containerregistrytype: 'Azure Container Registry'
+            azureSubscriptionEndpoint: 'myAzureSubscription'
+            azureContainerRegistry: 'myRegistry'
+            dockerComposeFile: '$(Pipeline.Workspace)/docker/docker-compose.yml'
+            action: 'Run services'
+            additionalDockerComposeFiles: |
+              $(Pipeline.Workspace)/docker/docker-compose.prod.yml
+        - task: AzureWebApp@1
+          displayName: Azure Web App Deploy
+          inputs:
+            appName: 'quantumoonight'
+            appType: webAppLinux
+            package: '$(Pipeline.Workspace)/docker/$(imageName).tar'
+            azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
