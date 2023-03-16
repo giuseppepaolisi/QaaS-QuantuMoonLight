@@ -3,20 +3,29 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-steps:
-- task: Docker@2
-  displayName: 'Build e push dell''immagine Docker'
-  inputs:
-    command: 'buildAndPush'
-    containerRegistry: 'Docker Hub Connection'
-    repository: 'skipper98/quantumoonlight'
-    dockerfile: '**/Dockerfile'
-    tags: 'latest'
+lockBehavior: sequential
+stages:
+- stage: Stage
+  jobs:
+  - deployment: Job
+    environment: my_environment
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Docker@2
+            displayName: 'Build e push dell''immagine Docker'
+            inputs:
+              command: 'buildAndPush'
+              containerRegistry: 'Docker Hub Connection'
+              repository: 'skipper98/quantumoonlight'
+              dockerfile: '**/Dockerfile'
+              tags: 'latest'
 
-- task: AzureWebAppContainer@1
-  displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
-  inputs:
-    appName: 'quantumoonlight'
-    containers: 'skipper98/quantumoonlight:latest'
-    azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
-    resourceGroupName: 'quantumoonlight-resource'
+          - task: AzureWebAppContainer@1
+            displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
+            inputs:
+              appName: 'quantumoonlight'
+              containers: 'skipper98/quantumoonlight:latest'
+              azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
+              resourceGroupName: 'quantumoonlight-resource'
