@@ -8,7 +8,7 @@ stages:
 - stage: Stage
   jobs:
   - deployment: Job
-    environment: my_environment
+    environment: EnviromentVM
     strategy:
       runOnce:
         deploy:
