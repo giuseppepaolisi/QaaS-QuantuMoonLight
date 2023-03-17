@@ -34,7 +34,6 @@ stages:
         pytest -p no:warnings
       displayName: 'Run tests'
       continueOnError: false
-      
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
@@ -54,6 +53,9 @@ stages:
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
         tags: 'latest'
+    - script: |
+        docker rmi skipper98/quantumoonlight:latest
+      displayName: 'Delete local Docker Image'
     - task: AzureWebAppContainer@1
       displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
       inputs:
