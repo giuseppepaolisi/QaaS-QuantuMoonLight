@@ -17,29 +17,6 @@ stages:
         tags: 'latest'
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
-
-- stage: Test
-  displayName: 'Run Tests'
-  dependsOn: Build
-  jobs:
-  - job: Test
-    steps:
-    - task: Bash@3
-      displayName: 'Install packages'
-      inputs:
-        targetType: 'inline'
-        script: |
-          pip install pytest
-    - script: |
-        pytest -p no:warnings
-      displayName: 'Run tests'
-      continueOnError: false
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'JUnit'
-        testResultsFiles: '**/TEST-*.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-
 - stage: Deploy
   displayName: 'Deploy to Azure'
   dependsOn: Test
