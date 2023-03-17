@@ -23,3 +23,10 @@ stages:
         containers: 'skipper98/quantumoonlight:latest'
         azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
         resourceGroupName: 'quantumoonlight-resource'
+    - task: AzureCLI@2
+      displayName: 'Avvio del servizio Web App'
+      inputs:
+        azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az webapp start --name quantumoonlight --resource-group quantumoonlight-resource'
