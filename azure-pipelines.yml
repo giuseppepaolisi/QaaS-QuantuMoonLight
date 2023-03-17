@@ -17,7 +17,8 @@ stages:
         Dockerfile: 'Dockerfile'
         buildContext: 'app/'
         tags: 'latest'
-  - job: 
+  - job: Deployment
+    dependsOn: DockerJob
     steps:
     - task: AzureWebAppContainer@1
       inputs:
