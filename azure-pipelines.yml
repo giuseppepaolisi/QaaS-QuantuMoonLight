@@ -29,15 +29,17 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          pip install pytest 
-          pytest
+          pip install pytest
+    - script: |
+        pytest
+      displayName: 'Run tests'
       continueOnError: false
+      
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
         testResultsFiles: '**/TEST-*.xml'
         searchFolder: '$(System.DefaultWorkingDirectory)'
-
 
 - stage: Deploy
   displayName: 'Deploy to Azure'
