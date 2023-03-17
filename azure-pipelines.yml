@@ -24,10 +24,8 @@ stages:
   jobs:
   - job: Test
     steps:
-    - task: UsePythonVersion@0
+    - task: Bash@3
       displayName: 'Install packages'
-      inputs:
-        versionSpec: '3.9'
     - script: |
         pip install pytest
         pytest
