@@ -17,9 +17,10 @@ stages:
         tags: 'latest'
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
+#cambia la dipendenza dello Stage Deploy
 - stage: Deploy
   displayName: 'Deploy to Azure'
-  dependsOn: Test
+  dependsOn: Build
   jobs:
   - job: Deploy
     steps:
