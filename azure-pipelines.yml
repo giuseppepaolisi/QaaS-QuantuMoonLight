@@ -31,7 +31,7 @@ stages:
         script: |
           pip install pytest
     - script: |
-        pytest
+        pytest -p no:warnings
       displayName: 'Run tests'
       continueOnError: false
       
