@@ -52,9 +52,9 @@ stages:
         repository: 'skipper98/quantumoonlight'
         tags: 'latest'
     - task: AzureWebAppContainer@1
-      displayName: 'Deploy Docker image to Azure Web App'
+      displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
       inputs:
-        azureSubscription: 'Azure for Students'
         appName: 'quantumoonlight'
         containers: 'skipper98/quantumoonlight:latest'
+        azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
         resourceGroupName: 'quantumoonlight-resource'
