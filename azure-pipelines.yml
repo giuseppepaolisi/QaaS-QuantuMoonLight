@@ -2,11 +2,8 @@ trigger:
 - master #elenco di rami per cui il push attiva un esecuzione
 pool:
   vmImage: 'ubuntu-latest'
-stages:
-- stage: Stage
-  lockBehavior: sequential
-  jobs:
-  - job: DockerJob
+jobs:
+  - job: ciao
     steps:
-    - script: |
-        
+      - script: |
+          echo "ciao"
