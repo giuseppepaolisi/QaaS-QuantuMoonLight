@@ -3,10 +3,10 @@ trigger:
 - master 
 pool: 'Default'
 stages:
-- stage: Stage
-  lockBehavior: sequential
+- stage: Build
+  displayName: 'Build Stage'
   jobs:
-  - job: Job
+  - job: Build
     steps:
     - task: Docker@2
       displayName: 'Build e push dell''immagine Docker'
@@ -16,10 +16,16 @@ stages:
         repository: 'skipper98/quantumoonlight'
         dockerfile: '**/Dockerfile'
         tags: 'latest'
-    - task: AzureWebAppContainer@1
-      displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
-      inputs:
-        appName: 'quantumoonlight'
-        containers: 'skipper98/quantumoonlight:latest'
-        azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
-        resourceGroupName: 'quantumoonlight-resource'
+
+- stage: Deployment
+  dependsOn: Build
+  jobs:
+    - job: 
+      steps:
+      - task: AzureWebAppContainer@1
+        displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
+        inputs:
+          appName: 'quantumoonlight'
+          containers: 'skipper98/quantumoonlight:latest'
+          azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
+          resourceGroupName: 'quantumoonlight-resource'
