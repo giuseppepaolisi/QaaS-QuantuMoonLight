@@ -17,10 +17,35 @@ stages:
         tags: 'latest'
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
-#cambia la dipendenza dello Stage Deploy
+- stage: Test
+  dependsOn: Build
+  displayName: 'Run Test'
+  jobs:
+    - job: TestDockerImage
+      displayName: 'Test Docker image'
+      steps:
+      - task: Bash@3
+        displayName: 'Run Docker image'
+        inputs:
+          targetType: 'inline'
+          script: |
+            docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name quantum_container skipper98/quantumoonlight
+      - script: |
+          docker exec $(docker ps --filter ancestor=skipper98/quantumoonlight -q) pytest -p no:warnings --junitxml=TEST-result.xml
+        displayName: 'Run tests'
+        continueOnError: false
+      - script: |
+          container_id=$(docker ps --filter ancestor=skipper98/quantumoonlight -q)
+          docker stop $container_id
+        displayName: 'Stop Docker container'
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/TEST-result.xml'
+          failTaskOnFailedTests: true
 - stage: Deploy
   displayName: 'Deploy to Azure'
-  dependsOn: Build
+  dependsOn: Test
   jobs:
   - job: Deploy
     steps:
