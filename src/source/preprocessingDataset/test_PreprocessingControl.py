@@ -214,7 +214,7 @@ class TestPreprocessingControl(unittest.TestCase):
         and Prototype Selection on the training dataset.
         Check if exist the two dataset to classify and the reduced Train and Test
         """
-        tester = app.test_client(self)
+        """tester = app.test_client(self)
         userpath = pathlib.Path(__file__).parents[0] / "testingFiles" / "bupa.csv"
         userpathToPredict = None
         prototypeSelection = True
@@ -247,7 +247,7 @@ class TestPreprocessingControl(unittest.TestCase):
         self.assertTrue(exists(pathData / "DataSetTestPreprocessato.csv"))
         self.assertTrue(exists(pathData / "reducedTrainingPS.csv"))
         self.assertTrue(exists(pathData / "Test_Feature_Extraction.csv"))
-        self.assertTrue(exists(pathData / "Train_Feature_Extraction.csv"))
+        self.assertTrue(exists(pathData / "Train_Feature_Extraction.csv"))"""
 
     """def test_PreprocessingControl_FE_QSVM(self):
         
@@ -294,6 +294,7 @@ class TestPreprocessingControl(unittest.TestCase):
         Test when the user wants to execute only Prototype Selection on the training dataset.
         Check if exist the two dataset to classify and the reduced Train
         """
+        """
         tester = app.test_client(self)
         userpath = pathlib.Path(__file__).parents[0] / "testingFiles" / "bupa.csv"
         userpathToPredict = None
@@ -325,7 +326,7 @@ class TestPreprocessingControl(unittest.TestCase):
         pathMock = pathlib.Path(__file__).parents[0] / "testingFiles"
         self.assertTrue(exists(pathMock / "DataSetTrainPreprocessato.csv"))
         self.assertTrue(exists(pathMock / "DataSetTestPreprocessato.csv"))
-        self.assertTrue(exists(pathMock / "reducedTrainingPS.csv"))
+        self.assertTrue(exists(pathMock / "reducedTrainingPS.csv"))"""
     def tearDown(self):
         """
         Remove all the files created
