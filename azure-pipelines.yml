@@ -17,7 +17,7 @@ stages:
         tags: 'latest'
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
-- stage: Test
+- stage: Tests
   dependsOn: Build
   displayName: 'Run Test'
   jobs:
@@ -36,8 +36,7 @@ stages:
         displayName: 'Run tests'
         continueOnError: false
       - script: |
-          container_id=$(docker ps --filter ancestor=skipper98/quantumoonlight -q)
-          docker stop $container_id
+          docker stop $(docker ps --filter ancestor=skipper98/quantumoonlight -q)
         displayName: 'Stop Docker container'
       - task: PublishTestResults@2
         inputs:
