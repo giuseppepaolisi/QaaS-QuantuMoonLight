@@ -13,7 +13,7 @@ stages:
       displayName: 'Build Docker Image'
       inputs:
         command: 'build'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'Dockerfile'
         tags: 'latest'
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
