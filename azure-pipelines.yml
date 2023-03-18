@@ -33,11 +33,9 @@ stages:
             sleep 10s
       - script: |
           docker exec $(docker ps --filter ancestor=skipper98/quantumoonlight -q) pytest -p no:warnings --junitxml=TEST-result.xml
+          docker stop $(docker ps --filter ancestor=skipper98/quantumoonlight -q)
         displayName: 'Run tests'
         continueOnError: false
-      - script: |
-          docker stop $(docker ps --filter ancestor=skipper98/quantumoonlight -q)
-        displayName: 'Stop Docker container'
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'JUnit'
