@@ -32,10 +32,12 @@ stages:
             docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name quantum_container skipper98/quantumoonlight
             sleep 10s
       - script: |
-          docker exec $(docker ps --filter ancestor=skipper98/quantumoonlight -q) pytest -p no:warnings --junitxml=TEST-result.xml
-          docker stop $(docker ps --filter ancestor=skipper98/quantumoonlight -q)
+          docker exec quantum_container pytest -p no:warnings --junitxml=TEST-result.xml
         displayName: 'Run tests'
         continueOnError: false
+      - script: |
+          docker stop quantum_container
+        displayName: 'Stop Docker container'
       - task: PublishTestResults@2
         inputs:
           testResultsFormat: 'JUnit'
