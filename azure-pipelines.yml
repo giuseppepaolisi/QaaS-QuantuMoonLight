@@ -17,9 +17,9 @@ stages:
         tags: 'latest'
         containerRegistry: 'Docker Hub Connection'
         repository: 'skipper98/quantumoonlight'
-- stage: Tests
+- stage: Test
   dependsOn: Build
-  displayName: 'Run Test'
+  displayName: 'Run Tests'
   jobs:
     - job: TestDockerImage
       displayName: 'Test Docker image'
