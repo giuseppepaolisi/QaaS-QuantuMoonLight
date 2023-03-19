@@ -1,5 +1,5 @@
 # Base image
-FROM continuumio/anaconda3:latest
+FROM continuumio/miniconda3:latest
 
 # Set working directory
 WORKDIR /app
