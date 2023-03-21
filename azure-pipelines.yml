@@ -15,8 +15,8 @@ stages:
         command: 'build'
         Dockerfile: 'Dockerfile'
         tags: 'latest'
-        containerRegistry: 'Docker Hub Connection'
-        repository: 'skipper98/quantumoonlight'
+        containerRegistry: 'quantumoonlight'
+        repository: 'quantumoonlight.azurecr.io/quantumoonlight'
 - stage: Test
   dependsOn: Build
   displayName: 'Run Tests'
@@ -29,7 +29,7 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name quantum_container skipper98/quantumoonlight
+            docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name quantum_container quantumoonlight.azurecr.io/quantumoonlight
             sleep 10s
       - script: |
           docker exec quantum_container pytest -p no:warnings --junitxml=TEST-result.xml
@@ -53,16 +53,16 @@ stages:
       displayName: 'Push Docker Image to registry'
       inputs:
         command: 'push'
-        containerRegistry: 'Docker Hub Connection'
-        repository: 'skipper98/quantumoonlight'
+        containerRegistry: 'quantumoonlight'
+        repository: 'quantumoonlight.azurecr.io/quantumoonlight'
         tags: 'latest'
 #    - script: |
-#        docker rmi skipper98/quantumoonlight:latest
+#        docker rmi quantumoonlight.azurecr.io/quantumoonlight:latest
 #      displayName: 'Delete local Docker Image'
     - task: AzureWebAppContainer@1
       displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
       inputs:
-        appName: 'quantumoonlight'
-        containers: 'skipper98/quantumoonlight:latest'
-        azureSubscription: 'Azure for Students(0e898bbd-4a52-42c0-af70-42233e2b4caa)'
-        resourceGroupName: 'quantumoonlight-resource'
+        appName: 'quantumoon'
+        containers: 'quantumoonlight.azurecr.io/quantumoonlight:latest'
+        azureSubscription: 'Azure for Students (09592d54-12d2-4bd0-8370-1991aef267b5)'
+        resourceGroupName: 'QuantuMoonLight-VM_group'
