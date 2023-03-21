@@ -15,8 +15,8 @@ stages:
         command: 'build'
         Dockerfile: 'Dockerfile'
         tags: 'latest'
-        containerRegistry: 'quantumoonlight'
-        repository: 'quantumoonlight.azurecr.io/quantumoonlight'
+        containerRegistry: 'quantumoonlight' # nome della connessione ad Azure registry
+        repository: 'quantumoonlight' # nome immagine
 - stage: Test
   dependsOn: Build
   displayName: 'Run Tests'
@@ -54,7 +54,7 @@ stages:
       inputs:
         command: 'push'
         containerRegistry: 'quantumoonlight'
-        repository: 'quantumoonlight.azurecr.io/quantumoonlight'
+        repository: 'quantumoonlight'
         tags: 'latest'
 #    - script: |
 #        docker rmi quantumoonlight.azurecr.io/quantumoonlight:latest
