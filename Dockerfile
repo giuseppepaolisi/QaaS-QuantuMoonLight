@@ -32,11 +32,11 @@ WORKDIR /app
 # Copy environment file
 COPY env/LINUX/environment.yml .
 
-# Create Anaconda environment
-RUN conda env create -f environment.yml && conda clean --all --yes
-
 # Set shell to bash
 SHELL ["/bin/bash", "--login", "-c"]
+
+# Create Anaconda environment
+RUN conda env create -f environment.yml && conda clean --all --yes
 
 # Activate environment
 ENV PATH /opt/conda/envs/quantumoonlight/bin:$PATH
