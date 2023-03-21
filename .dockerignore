@@ -3,6 +3,7 @@
 
 # Allow files and directories required for the build
 !app.py
+!pytest.ini
 !app/
 !env/
 !src/
