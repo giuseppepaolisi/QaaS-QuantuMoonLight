@@ -64,5 +64,5 @@ stages:
       inputs:
         appName: 'quantumoon'
         containers: 'quantumoonlight.azurecr.io/quantumoonlight:latest'
-        azureSubscription: 'Azure for Students (09592d54-12d2-4bd0-8370-1991aef267b5)'
+        azureSubscription: 'azureSubscription'
         resourceGroupName: 'QuantuMoonLight-VM_group'
