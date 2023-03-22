@@ -10,7 +10,7 @@
 **Indice dei contenuti:**
 
 - [What is QuantuMoonLight](#what-is-quantumoonlight)
-- [Azure Cloud Services used](#azure-cloud-service)
+- [Azure Cloud Services](#azure-cloud-services)
 - [How to install with Docker](#how-to-install-with-docker)
 
 
