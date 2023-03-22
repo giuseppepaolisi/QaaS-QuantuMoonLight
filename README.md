@@ -10,10 +10,9 @@
 **Indice dei contenuti:**
 
 - [What is QuantuMoonLight](#what-is-quantumoonlight)
-- [Azure Cloud Services used](#azure-cloud-services-used)
-- [Analisi Semantica](#analisi-semantica)
-- [Generazione Codice Intermedio](#generazione-del-codice-intermedio)
-- [Bug Noti e Scelte Progettuali Fatte](#bug-noti-e-scelte-progettuali-fatte)
+- [Azure Cloud Services used](#azure-cloud-service)
+- [How to install with Docker](#how-to-install-with-docker)
+
 
 ## What is QuantuMoonLight
 
