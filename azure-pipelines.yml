@@ -15,8 +15,10 @@ stages:
         command: 'build'
         Dockerfile: 'Dockerfile'
         tags: 'latest'
-        containerRegistry: 'quantumoonlight' # nome della connessione ad Azure registry
-        repository: 'quantumoonlight' # nome immagine
+        # nome della connessione ad Azure registry
+        containerRegistry: 'quantumoonlight' 
+        # nome immagine
+        repository: 'quantumoonlight' 
 - stage: Test
   dependsOn: Build
   displayName: 'Run Tests'
@@ -29,7 +31,8 @@ stages:
         inputs:
           targetType: 'inline'
           script: |
-            docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name quantum_container quantumoonlight.azurecr.io/quantumoonlight
+            docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name 
+            \ quantum_container quantumoonlight.azurecr.io/quantumoonlight
             sleep 10s
       - script: |
           docker exec quantum_container pytest -p no:warnings --junitxml=TEST-result.xml
@@ -56,9 +59,6 @@ stages:
         containerRegistry: 'quantumoonlight'
         repository: 'quantumoonlight'
         tags: 'latest'
-#    - script: |
-#        docker rmi quantumoonlight.azurecr.io/quantumoonlight:latest
-#      displayName: 'Delete local Docker Image'
     - task: AzureWebAppContainer@1
       displayName: 'Deploy dell''immagine Docker sull''Azure Web App'
       inputs:
