@@ -32,7 +32,7 @@ stages:
           targetType: 'inline'
           script: |
             docker run --rm -d -p 5000:5000 --env ENVIRONMENT=Test --name 
-            \ quantum_container quantumoonlight.azurecr.io/quantumoonlight
+            quantum_container quantumoonlight.azurecr.io/quantumoonlight
             sleep 10s
       - script: |
           docker exec quantum_container pytest -p no:warnings --junitxml=TEST-result.xml
