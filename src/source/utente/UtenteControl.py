@@ -1,4 +1,5 @@
 import collections
+import os
 import hashlib
 import itertools
 import json
@@ -184,6 +185,7 @@ class UtenteControl:
                     else:
                         break
                 zip.close()
+                os.chmod(zip_path, 0o777)
             else:
                 zip_path = filepath / 'PreprocessingResult.zip'
                 zip_name = 'PreprocessingResult.zip'
@@ -248,10 +250,11 @@ class UtenteControl:
                         filepath / "PredictScaled.csv",
                         "PredictScaled.csv")
                 zip.close()
-
+                os.chmod(zip_path, 0o777)
+            print("\n\n\n\tzip_name: ", zip_name)
             return send_from_directory(
                 directory=filepath,
-                path=zip_name
+                filename=zip_name
             )
         else:
             flash(

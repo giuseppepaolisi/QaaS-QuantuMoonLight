@@ -47,6 +47,9 @@ COPY env/base.py ../opt/conda/envs/quantumoonlight/lib/python3.9/site-packages/d
 # Copy application code
 COPY . /app
 
+# set upload_dataset permission
+RUN chmod -R 777 /app/upload_dataset
+
 # Expose port
 EXPOSE 5000
 

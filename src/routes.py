@@ -1,4 +1,5 @@
 import os.path
+import os
 import pathlib
 from datetime import datetime
 
@@ -812,7 +813,8 @@ def upload(file, file1, file2, idTrainSet):
             / str(idTrainSet)
     )
     if not uploaddir.exists():
-        uploaddir.mkdir()
+        os.makedirs(uploaddir, exist_ok=True)
+        os.umask(0)
     userpath = uploaddir / os.path.basename(pathlib.Path(file.filename))
     file.save(userpath)
     if file.content_length > 80000000:
