@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 ENV PATH /opt/conda/bin:$PATH
 
 # Update these args to match the latest Miniconda3 version
-ARG CONDA_VERSION=py39_23.1.0-1
+ARG CONDA_VERSION=py37_4.10.3
 
 # Install dependencies
 RUN apt-get update && \

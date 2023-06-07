@@ -254,7 +254,7 @@ class UtenteControl:
             print("\n\n\n\tzip_name: ", zip_name)
             return send_from_directory(
                 directory=filepath,
-                filename=zip_name
+                path=zip_name
             )
         else:
             flash(
