@@ -37,8 +37,6 @@ def callFeatureExtraction_Selection(
     :rtype: pathlib.Path, pathlib.Path
     """
     print("Into callFeatureExtraction_Selection...")
-    print(featureSelection)
-    print(featureExtraction)
     pathFileYourPCA = pathTrain.parent
 
     # A comma-separated values (csv) file is returned as a DataFrame: two-dimensional data structure with labeled axes.
@@ -56,8 +54,9 @@ def callFeatureExtraction_Selection(
     X_test_scaled = sc.fit_transform(X_test)
 
     global pca, kbest, pathFileYourPCATrain, pathFileYourPCATest, PCA_df_train, X_test_, X_train_
-
-    if featureSelection == True or featureSelection == "True":
+    print("\n\n\tFS: ", featureSelection, "\n\tFE: ", featureExtraction, "\n\tCLASSIFICATION: ", classification, "\n\n")
+    if featureSelection:
+        print("\n\n\tFS\n\n")
         kbest = SelectKBest(score_func=chi2, k=n_componentsFS)
         X_train_ = kbest.fit_transform(X_train_scaled, Y_train)
         X_test_ = kbest.fit_transform(X_test_scaled, Y_test)
@@ -75,7 +74,8 @@ def callFeatureExtraction_Selection(
         PCA_df_train.to_csv(pathFileYourPCATrain, index=False)
         PCA_df_test.to_csv(pathFileYourPCATest, index=False)
 
-    if featureExtraction == True or featureExtraction == "True":
+    if featureExtraction:
+        print("\n\n\tFE\n\n")
         # Feature Extraction
         pca = PCA(n_componentsFE)
         pca.fit(X_train_scaled)
@@ -131,7 +131,9 @@ def callFeatureExtraction_Selection(
             plt.savefig(pathFileYourPCA / 'graphFE', dpi=150)
             plt.show()
 
-    if classification == True or classification == "True":
+
+    if classification:
+        print("\n\n\tCLASSIFICATION\n\n")
         df_to_predict = pd.read_csv(pathToPredict, header=None)
         df_to_predict.columns = X_train.columns
         print(df_to_predict)
