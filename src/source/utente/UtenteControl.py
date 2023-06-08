@@ -249,6 +249,10 @@ class UtenteControl:
                     zip.write(
                         filepath / "PredictScaled.csv",
                         "PredictScaled.csv")
+                if exists(filepath / "classifiedFile.csv"):
+                    zip.write(
+                        filepath / "classifiedFile.csv",
+                        "classifiedFile.csv")
                 zip.close()
                 os.chmod(zip_path, 0o777)
             print("\n\n\n\tzip_name: ", zip_name)
